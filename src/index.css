@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "title" ;
+    src: local("PhotographSignature")
+    url(".fonts/PhotographSignature.ttf") format("truetype");
+}
+
+*{
+    font-family: 'Dosis', sans-serif;
+}
+
+.title{
+    font-family: 'Rock Salt', cursive;
+}
