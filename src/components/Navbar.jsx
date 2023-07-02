@@ -59,7 +59,7 @@ const Navbar = () => {
                               key={category.name}
                               className={({ selected }) =>
                                 classNames(
-                                  selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900',
+                                  selected ? 'border-primary text-primary' : 'border-transparent text-highlight',
                                   'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium'
                                 )
                               }
@@ -110,12 +110,12 @@ const Navbar = () => {
     
                     <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                       <div className="flow-root">
-                        <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                        <a href="/account" className="-m-2 block p-2 font-medium text-gray-900">
                           Sign in
                         </a>
                       </div>
                       <div className="flow-root">
-                        <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
+                        <a href="/account" className="-m-2 block p-2 font-medium text-gray-900">
                           Create account
                         </a>
                       </div>
@@ -246,11 +246,11 @@ const Navbar = () => {
     
                   <div className="ml-auto flex items-center">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                      <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                      <a href="/account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                         Sign in
                       </a>
                       <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
-                      <a href="#" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                      <a href="/account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                         Create account
                       </a>
                     </div>
@@ -277,7 +277,7 @@ const Navbar = () => {
     
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-6">
-                      <a href="#" className="group -m-2 flex items-center p-2">
+                      <a href="/cart" className="group -m-2 flex items-center p-2">
                         <ShoppingBagIcon
                           className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
