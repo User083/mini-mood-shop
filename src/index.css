@@ -12,8 +12,10 @@
 
 *{
     font-family: 'Dosis', sans-serif;
+    
 }
 
-.title{
-    font-family: 'Rock Salt', cursive;
+:root{
+    background-color: #F4F3EE;
 }
+
