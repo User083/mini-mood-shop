@@ -1,11 +1,15 @@
 import {logo} from "../assets"
-import Collections from "../components/Collections"
+import {Collections, Promo} from "../components"
 
 const Home = () => {
     return(
-        <div className="flex flex-col justify-start items-center w-full bg-white">    
-        <img alt="logo" src={logo} className="h-[200px] w-[450px] my-5"/>
+        <div className="flex flex-col items-center justify-center w-full bg-white min-h-[700px] snap-mandatory snap-y">    
+       <div className="w-full snap-start lg:min-h-[900px] flex items-center justify-center">
+        <Promo/>
+       </div>
+       <div className="snap-start w-full">
         <Collections/>
+       </div>
         </div>
     )
 }

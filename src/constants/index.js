@@ -1,4 +1,4 @@
-import { women, men, jewellery } from "../assets";
+import { women, men, jewellery, cardigan1, cardigan2, cardigan3, cardigan4, cardigan5, cardigan6, cardigan7 } from "../assets";
 
 export const collections = [
     {
@@ -23,6 +23,25 @@ export const collections = [
         link: "/store#jewellery",
     },    
 ];
+
+export const cardigans = 
+    {
+        
+        1: cardigan1,
+       
+        2: cardigan2,
+     
+        3: cardigan3,
+  
+        4: cardigan4,
+    
+        5: cardigan5,
+
+        6: cardigan6,
+
+        7: cardigan7,
+    }
+
 
 export const navigation = {
     categories: [

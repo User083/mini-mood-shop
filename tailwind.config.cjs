@@ -13,7 +13,7 @@ export default {
       },
       fontFamily: {
         title: ['Photograph Signature']
-      }
+      },
     },
   },
   plugins: [

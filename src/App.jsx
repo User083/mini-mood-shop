@@ -10,7 +10,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className=''>
+
     <Navbar/>
     <Routes>
       
@@ -18,7 +18,7 @@ function App() {
       <Route path='/store' element={<Store/>}/>
     </Routes>
     <Footer/>
-    </div>
+
     </BrowserRouter>
 
   )
