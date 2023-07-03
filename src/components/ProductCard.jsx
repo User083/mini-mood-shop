@@ -1,17 +1,21 @@
 
-const ProductCard = ({id, name, price, image, category}) => {
+const ProductCard = ({id, title, price, image, category}) => {
 
     return (
-        <>
-        <a href={`/store/product-${id}`} className="group">
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-          <img src={image} alt={name} className="h-full w-full object-cover object-center group-hover:opacity-75"/>
+        <div className="bg-secondary rounded my-5 max-w-[300px]">
+        <div className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t bg-[#ffffff] px-5 py-5 flex items-center">
+          <img src={image} alt={title} className="bg-white hover:opacity-75"/>          
         </div>
-        <h3 className="mt-4 text-sm text-gray-700">{name}</h3>     
-        <p className="mt-1 text-lg font-medium text-gray-900">£{price}</p>
-        <p className="mt-1 text-lg font-medium text-gray-900">in: {category}</p>
-      </a>
-        </>
+        <div className="px-5 py-3 flex flex-row justify-between h-[100px]">
+          <div>
+            <h3 className="text-sm font-bold text-primary">{title}</h3>
+            <p className="text-sm text-tertiary">in: {category}</p> 
+          </div>
+        <div className="flex justify-end items-end">
+          <p className="text-lg font-medium text-white">£{price}</p>
+        </div>                      
+        </div>
+        </div>
     )
 }
 
