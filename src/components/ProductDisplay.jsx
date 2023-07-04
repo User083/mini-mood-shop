@@ -3,33 +3,48 @@ import { ProductCard } from "../components"
 import axios from "axios";
 import useAxios from "../utils/useAxios";
 import { loader } from "../assets";
+import { collections } from "../constants";
 
 
 
-const ProductDisplay = ({url, name}) => {
+const ProductDisplay = ({query, title}) => {
  
-
+  const [category, setCategory] = useState(query);
   const [result, error, loading, refetch] = useAxios({
     axiosInstance: axios.create({
       baseURL: "https://fakestoreapi.com/"
   }),
     method: 'GET',
-    url: url,
+    url: category,
     requestConfig: {
       // timeout : 2000
     }
   });
-
-
- console.log(result, error, loading)
     return(
 
-        <div className="w-4/6 bg-tertiary my-10 flex flex-col lg:px-10 md:px-4 rounded min-h-[700px]">
-          <h2 className="text-primary font-bold mx-5 mt-5 text-2xl">{name}</h2>
+        <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 rounded min-h-[700px]">
+          <div className="flex justify-between my-2">
+            <h2 className="text-primary font-bold mx-5 text-2xl">Products</h2>
+            <div className="flex gap-5">
+              <button onClick={()=>{
+              setCategory(collections[0].query); 
+              refetch()}}
+            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Women's</button>
+              <button onClick={()=>{
+              setCategory(collections[1].query); 
+              refetch()}}
+            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Men's</button>
+            <button onClick={()=>{
+              setCategory(collections[2].query); 
+              refetch()}}
+            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Jewellery</button>
+          </div>
+            </div>
+            
           <div className="w-full flex items-center justify-center min-h-[400px]">
           {loading && <img src={loader} className="animate-spin h-[50px]"/>}
           {!loading && error && <p className='text-secondary text-center font-medium'>{error}</p>}
-          {!loading && !error && result &&  <div className="flex flex-wrap items-center justify-evenly">
+          {!loading && !error && result &&  <div className="grid lg:grid-cols-3 md: grid-cols-2 gap-4">
                 {result.map((product)=>(
                   <ProductCard key={product.id} {...product}/>
                  ))}
