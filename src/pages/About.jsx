@@ -10,10 +10,10 @@ const About = () => {
             </div>   
             
             <div className="flex flex-col ">
-            <section className="flex gap-10 md:flex-row flex-col items-center ">
-                <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px]">
+            <section className="flex gap-10 md:flex-row flex-col items-center">
+                <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px] hover:rotate-3 hover:scale-105 group transition-all">
                 <img src={girls2} alt="Stock Photo" className="aspect-h-1 aspect-w-1 max-h-[500px] p-4"/>
-                <h className="font-medium text-4xl font-title pb-5 text-black">Two moody sisters...</h>
+                <h className="font-medium text-4xl font-title pb-5 text-black">Two <span className="font-title group-hover:text-highlight transition-all">moody</span> sisters...</h>
                 </div>
                 <div className="flex flex-col justify-around items-end">
                     <div className="flex flex-col gap-5 max-w-[500px] text-primary text-lg justify-center">
@@ -26,7 +26,7 @@ const About = () => {
             </section>
         <div className="flex flex-col items-center">
             <section className="flex gap-10 md:flex-row flex-col items-center ">
-                <div className="flex flex-col justify-around items-end">
+                <div className="flex flex-col justify-around items-end  ">
                     <div className="flex flex-col gap-5 max-w-[500px] text-primary text-lg justify-center">
 
                         <p>MiniMood's collection is an ever-evolving tapestry of striking designs, ranging from bold and edgy to ethereal and romantic. Each piece is carefully selected to ignite the spark of self-confidence and to inspire wearers to embrace their own enigmatic beauty. </p>
@@ -36,10 +36,10 @@ const About = () => {
                         </p>
                     </div>      
                 </div>
-                <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px]">
+                <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px] hover:-rotate-3 hover:scale-105 group transition-all ">
                     
                     <img src={girls} alt="Stock Photo" className="aspect-h-1 aspect-w-1 max-h-[500px] p-4"/>
-                    <h className="font-medium text-4xl font-title pb-5 text-black">...who love fashion</h>
+                    <h className="font-medium text-4xl font-title pb-5 text-black ">...who love <span className="font-title group-hover:text-highlight transition-all">fashion</span></h>
                 </div>
             </section>
                     <div className="md:mt-[-20px]">
