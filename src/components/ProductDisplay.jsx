@@ -22,10 +22,10 @@ const ProductDisplay = ({query, title}) => {
   });
     return(
 
-        <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 rounded min-h-[700px]">
+        <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-[700px]">
           <div className="flex justify-between my-2">
             <h2 className="text-primary font-bold mx-5 text-2xl">Products</h2>
-            <div className="flex gap-5">
+            <div className="flex gap-5 flex-wrap sm:gap-2">
               <button onClick={()=>{
               setCategory(collections[0].query); 
               refetch()}}
@@ -44,7 +44,7 @@ const ProductDisplay = ({query, title}) => {
           <div className="w-full flex items-center justify-center min-h-[400px]">
           {loading && <img src={loader} className="animate-spin h-[50px]"/>}
           {!loading && error && <p className='text-secondary text-center font-medium'>{error}</p>}
-          {!loading && !error && result &&  <div className="grid lg:grid-cols-3 md: grid-cols-2 gap-4">
+          {!loading && !error && result &&  <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
                 {result.map((product)=>(
                   <ProductCard key={product.id} {...product}/>
                  ))}
