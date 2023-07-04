@@ -87,7 +87,7 @@ const Cart = () => {
                    
 
           {/* price and checkout */}
-          <div className="rounded px-4 py-6 sm:px-6 border border-tertiary min-w-[250px] max-w-[500px] w-full flex flex-col gap-2 mx-10 mt-0 lg:mt-10">
+          <div className="rounded px-4 py-6 sm:px-6 border-[20px] shadow-md border-secondary min-w-[250px] max-w-[500px] w-full flex flex-col gap-2 mx-10 mt-0 lg:mt-10">
             <div className="border-b py-2 border-secondary">
               <h1 className="font-bold text-lg">Order Summary</h1>
             </div>

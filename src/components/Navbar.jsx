@@ -156,7 +156,7 @@ const Navbar = () => {
                                   className={classNames(
                                     open
                                       ? 'bg-highlight text-primary'
-                                      : 'text-primary hover:text-white bg-tertiary',
+                                      : 'text-highlight hover:text-black hover:animate-pulse',
                                     'relative z-10 -mb-px flex items-center pt-px text-sm font-medium transition-colors duration-200 ease-out px-2'
                                   )}
                                 >
@@ -173,7 +173,7 @@ const Navbar = () => {
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                               >
-                                <Popover.Panel className="absolute inset-x-0 top-full text-sm text-gray-500">
+                                <Popover.Panel className="absolute inset-x-0 top-full text-sm text-secondary">
                                   <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
     
                                   <div className="relative bg-white">
@@ -184,7 +184,7 @@ const Navbar = () => {
                                         <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                      
                                             <div key={category.name}>
-                                              <p id={`${category.name}-heading`} className="font-medium text-gray-900">
+                                              <p id={`${category.name}-heading`} className="font-medium text-primary">
                                                 {category.name}
                                               </p>
                                               <ul
@@ -194,7 +194,7 @@ const Navbar = () => {
                                               >
                                                 {category.items.map((item) => (
                                                   <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-gray-800">
+                                                    <a href={item.href} className="hover:text-highlight">
                                                       {item.name}
                                                     </a>
                                                   </li>
@@ -217,7 +217,7 @@ const Navbar = () => {
                         <a
                           key={page.name}
                           href={page.href}
-                          className="flex items-center text-sm font-medium text-gray-700 hover:text-secondary"
+                          className="flex items-center text-sm font-medium text-primary hover:text-highlight"
                         >
                           {page.name}
                         </a>
