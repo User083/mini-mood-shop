@@ -257,7 +257,7 @@ const Navbar = () => {
                     </div>
     
                     <div className="hidden lg:ml-8 lg:flex">
-                      <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
+                      {/* <a href="#" className="flex items-center text-gray-700 hover:text-gray-800"> */}
                         <img
                           src="https://tailwindui.com/img/flags/flag-united-kingdom.svg"
                           alt=""
@@ -265,16 +265,16 @@ const Navbar = () => {
                         />
                         <span className="ml-3 block text-sm font-medium">GBP</span>
                         <span className="sr-only">, change currency</span>
-                      </a>
+                      {/* </a> */}
                     </div>
     
                     {/* Search */}
-                    <div className="flex lg:ml-6">
+                    {/* <div className="flex lg:ml-6">
                       <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
                         <span className="sr-only">Search</span>
                         <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                       </a>
-                    </div>
+                    </div> */}
     
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-6">

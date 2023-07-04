@@ -1,7 +1,7 @@
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Store, About } from './pages'
+import { Home, Store, About, Cart, Account } from './pages'
 import { Navbar, Footer } from './components'
 
 
@@ -17,8 +17,8 @@ function App() {
       <Route path='/' element={<Home/>}/>
       <Route path='/store' element={<Store/>}/>
       <Route path='/about' element={<About/>}/>
-      <Route path='/cart' element={<About/>}/>
-      <Route path='/account' element={<About/>}/>
+      <Route path='/cart' element={<Cart/>}/>
+      <Route path='/account' element={<Account/>}/>
     </Routes>
     <Footer/>
 
