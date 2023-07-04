@@ -52,9 +52,9 @@ export const navigation = {
         id: 'collections',
         name: 'Collections',
             items: [
-              { name: "Women's Clothing", href: '/store' },
-              { name: "Men's Clothing", href: '/store' },
-              { name: "Jewellery", href: '/store' },
+              { name: "Women's Clothing", href: '/store', query: "products/category/women's clothing" },
+              { name: "Men's Clothing", href: '/store', query: "products/category/men's clothing" },
+              { name: "Jewellery", href: '/store', query: "products/category/jewelery" },
             ],
           },
         ],
