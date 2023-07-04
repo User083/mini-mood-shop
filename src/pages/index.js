@@ -2,6 +2,6 @@ import Home from "./Home"
 import Store from "./Store"
 import About from "./About"
 import Cart from "./Cart"
-import Account from "./Account"
+import Checkout from "./Checkout"
 
-export {Home, Store, About, Cart, Account}
+export {Home, Store, About, Cart, Checkout}

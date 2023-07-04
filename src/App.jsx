@@ -1,7 +1,7 @@
 
 import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Home, Store, About, Cart, Account } from './pages'
+import { Home, Store, About, Cart, Checkout } from './pages'
 import { Navbar, Footer } from './components'
 
 
@@ -18,8 +18,7 @@ function App() {
       <Route path='/store' element={<Store/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path='/cart' element={<Cart/>}/>
-      <Route path='/cart/checkout' element={<Account/>}/>
-      <Route path='/account' element={<Account/>}/>
+      <Route path='/cart/checkout' element={<Checkout/>}/>
     </Routes>
     <Footer/>
 

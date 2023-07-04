@@ -3,9 +3,9 @@ import { logo, girls, girls2 } from "../assets"
 
 const About = () => {
     return(
-        <div className="min-h-screen w-full flex flex-col justify-start items-center mt-5 py-5 mb-10 px-10 md:px-0">
+        <div className="min-h-screen w-full flex flex-col justify-start items-center py-5 mb-10 px-10 md:px-0">
             <div className="py-5 border-b mb-10 border-tertiary flex items-center justify-between w-full max-w-[800px] gap-20">
-            <h className="font-title text-4xl font-medium">All About...</h>
+            <h className="font-title text-5xl font-medium">All About...</h>
             <img src={logo} alt="Logo" className="max-w-[100px]"/>       
             </div>   
             
