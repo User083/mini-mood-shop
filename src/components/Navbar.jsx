@@ -175,9 +175,9 @@ const Navbar = () => {
                                 <Popover.Button
                                   className={classNames(
                                     open
-                                      ? 'border-primary text-primary'
-                                      : 'border-transparent text-gray-700 hover:text-gray-800',
-                                    'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out'
+                                      ? 'bg-highlight text-primary'
+                                      : 'text-primary hover:text-white bg-tertiary',
+                                    'relative z-10 -mb-px flex items-center pt-px text-sm font-medium transition-colors duration-200 ease-out px-2'
                                   )}
                                 >
                                   Shop Now

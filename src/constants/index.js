@@ -59,6 +59,7 @@ export const navigation = {
           },
         ],
     pages: [
+      { name: 'Home', href: '/' },
       { name: 'About Us', href: '/about' },
     ],
   }
