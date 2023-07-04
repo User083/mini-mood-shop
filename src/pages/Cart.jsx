@@ -40,10 +40,10 @@ const Cart = () => {
   const [price, setPrice] = useState("0.00");
  
     return(
-        <div className="bg-white flex w-full min-h-screen justify-center flex-wrap">
-          <div className="flex w-4/6 gap-10 justify-around items-start my-12 h-full">
+        <div className="bg-white flex w-full min-h-screen justify-center">
+          <div className="flex w-4/6 gap-10 justify-center items-center my-12 h-full flex-col lg:flex-row lg:w-full lg:items-start">
  {/* products */}
-                      <div className="mt-8 w-full">
+                      <div className="mt-8 w-full max-w-[500px] ">
                         <div className="flow-root border-b border-secondary pb-5">
                           <ul role="list" className="-my-6 divide-y divide-tertiary">
                             {products.map((product) => (
@@ -87,7 +87,7 @@ const Cart = () => {
                    
 
           {/* price and checkout */}
-          <div className="rounded px-4 py-6 sm:px-6 border border-tertiary min-w-[250px] max-w-[500px] w-full flex flex-col gap-2 mx-10 ">
+          <div className="rounded px-4 py-6 sm:px-6 border border-tertiary min-w-[250px] max-w-[500px] w-full flex flex-col gap-2 mx-10 mt-0 lg:mt-10">
             <div className="border-b py-2 border-secondary">
               <h1 className="font-bold text-lg">Order Summary</h1>
             </div>
