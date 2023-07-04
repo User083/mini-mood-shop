@@ -10,5 +10,7 @@ import cardigan5 from "./cardigan5.png"
 import cardigan6 from "./cardigan6.png"
 import cardigan7 from "./cardigan7.png"
 import loader from "./loading.png"
+import girls from "./girls.png"
+import girls2 from "./girls2.png"
 
-export {logo, women, men, jewellery, cardigan1, cardigan2, cardigan3, cardigan4, cardigan5, cardigan6, cardigan7, loader}
+export {logo, women, men, jewellery, cardigan1, cardigan2, cardigan3, cardigan4, cardigan5, cardigan6, cardigan7, loader, girls, girls2}
