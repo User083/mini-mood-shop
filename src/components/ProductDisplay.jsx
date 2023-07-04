@@ -22,7 +22,7 @@ const ProductDisplay = ({query, title}) => {
   });
     return(
 
-        <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-[700px]">
+        <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-screen">
           <div className="flex justify-between my-2">
             <h2 className="text-primary font-bold mx-5 text-2xl">Products</h2>
             <div className="flex gap-5 flex-wrap sm:gap-2">

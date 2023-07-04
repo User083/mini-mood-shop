@@ -4,7 +4,7 @@ const Account = () => {
  
  
     return(
-        <div className="bg-white flex w-full h-full flex-col items-center">
+        <div className="bg-white flex w-full min-h-screen flex-col items-center">
           <Construction/>
       </div>
     )
