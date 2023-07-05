@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Home, Store, About, Cart, Checkout } from './pages'
 import { Navbar, Footer } from './components'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 
 function App() {
