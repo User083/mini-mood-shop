@@ -35,7 +35,6 @@ const useAxios = (config) =>
         }
         fetchData();
 
-
     }, [reload])
 
     return [response, error, loading, refetch];

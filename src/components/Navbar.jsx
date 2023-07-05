@@ -1,16 +1,18 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { navigation } from '../constants'
+import { navigation, collections } from '../constants'
 import { logo } from '../assets'
+import { Link } from 'react-router-dom'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
 
-const Navbar = () => {
+const Navbar = (props) => {
 
     const [open, setOpen] = useState(false)
+
     return (
         <div className="bg-white">
           {/* Mobile menu */}
@@ -194,9 +196,19 @@ const Navbar = () => {
                                               >
                                                 {category.items.map((item) => (
                                                   <li key={item.name} className="flex">
-                                                    <a href={item.href} className="hover:text-highlight">
+                                                    <Link
+                                                    to={item.href}>
+                                                    <button 
+                                                    onClick={()=>{
+                                                   
+                                                      props.setQuery(item.query);
+                                                      
+                                                    }}
+                                                    className="hover:text-highlight">
                                                       {item.name}
-                                                    </a>
+                                                    </button>
+                                                    </Link>
+   
                                                   </li>
                                                 ))}
                                               </ul>

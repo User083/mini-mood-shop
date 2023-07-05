@@ -1,7 +1,7 @@
 import { collections } from "../constants"
 import {CollectionCard} from "./index"
 
-const Collections = () => {
+const Collections = (props) => {
 
     return (
         <div className="bg-highlight rounded px-10">
@@ -11,7 +11,7 @@ const Collections = () => {
                 <div className="mt-6 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">      
                 
                     {collections.map((item, index) => (
-                <CollectionCard key={item.id} id={item.id} index={index} {...item}/>
+                <CollectionCard key={item.id} id={item.id} index={index} {...props} collection={...item} />
             ))}
         
                 </div>           

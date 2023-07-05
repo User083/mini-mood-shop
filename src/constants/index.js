@@ -9,7 +9,7 @@ export const collections = [
         description: "For the ladies",
         image: women,
         link: "/store",
-        query: "products/category/women's clothing"
+        query: "women"
     },
     {
         id: "men",
@@ -17,15 +17,15 @@ export const collections = [
         description: "For the gents",
         image: men,
         link: "/store",
-        query: "products/category/men's clothing"
+        query: "men"
     },
     {
-        id: "jewellery",
-        title: "Jewellery",
+        id: "accessories",
+        title: "Accessories",
         description: "Add some bling",
         image: jewellery,
         link: "/store",
-        query: "products/category/jewelery"
+        query: "accessories"
     },    
 ];
 
@@ -54,9 +54,9 @@ export const navigation = {
         id: 'collections',
         name: 'Collections',
             items: [
-              { name: "Women's Clothing", href: '/store', query: "products/category/women's clothing" },
-              { name: "Men's Clothing", href: '/store', query: "products/category/men's clothing" },
-              { name: "Jewellery", href: '/store', query: "products/category/jewelery" },
+              { name: "Women's Clothing", href: '/store', query: "women" },
+              { name: "Men's Clothing", href: '/store', query: "men" },
+              { name: "Accessories", href: '/store', query: "accessories" },
             ],
           },
         ],

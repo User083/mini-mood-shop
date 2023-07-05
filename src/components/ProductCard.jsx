@@ -2,8 +2,8 @@
 const ProductCard = ({id, title, price, image, category}) => {
 
     return (
-        <div className="bg-secondary rounded my-5 md:max-w-[300px]">
-        <div className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t bg-[#ffffff] px-5 py-5 flex items-center ">
+        <div id={id} className="bg-secondary rounded my-5 md:max-w-[300px]">
+        <div className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
           <img src={image} alt={title} className="bg-white hover:opacity-75"/>          
         </div>
         <div className="px-5 py-3 flex flex-row justify-between h-[100px] overflow-hidden">

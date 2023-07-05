@@ -3,13 +3,13 @@ import { ProductCard } from "../components"
 import axios from "axios";
 import useAxios from "../utils/useAxios";
 import { loader } from "../assets";
-import { collections } from "../constants";
 
 
 
-const ProductDisplay = ({query, title}) => {
+
+const ProductDisplay = ({query}) => {
  
-  const [category, setCategory] = useState("products");
+  const [category, setCategory] = useState(query);
   const [result, error, loading, refetch] = useAxios({
     axiosInstance: axios.create({
       baseURL: "https://burgundy-millipede-cuff.cyclic.app/"
@@ -20,13 +20,16 @@ const ProductDisplay = ({query, title}) => {
       // timeout : 2000
     }
   });
-  console.log(result)
-    return(
 
+    return(
         <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-screen">
-          <div className="flex justify-between my-2">
+          <div className="flex justify-between my-2 border-b pb-5">
             <h2 className="text-primary font-bold mx-5 text-2xl">Products</h2>
             <div className="flex gap-5 flex-wrap sm:gap-2">
+            <button onClick={()=>{
+              setCategory("products"); 
+              refetch()}}
+            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">All</button>
               <button onClick={()=>{
               setCategory("women"); 
               refetch()}}
@@ -38,7 +41,7 @@ const ProductDisplay = ({query, title}) => {
             <button onClick={()=>{
               setCategory("accessories"); 
               refetch()}}
-            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Jewellery</button>
+            className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Accessories</button>
           </div>
             </div>
             
