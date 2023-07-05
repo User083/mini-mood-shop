@@ -5,7 +5,26 @@ import { useEffect, useState } from 'react';
 
 const ProductCard = ({id, title, price, image, category}) => {
 
-  
+  async function addItem(id)
+  {
+    await axios({
+      method: 'POST',
+      url: `https://burgundy-millipede-cuff.cyclic.app/cart/`,
+      headers : {
+        "Content-Type": "application/json",
+      },
+      data: {
+          "id": id,
+    "title": title,
+    "price": price,
+    "image": image,
+    "category": category
+      }
+    })
+    .then((r) => {
+      
+    });
+  }
 
 
     return (
@@ -23,7 +42,8 @@ const ProductCard = ({id, title, price, image, category}) => {
           <p className="text-lg font-medium text-white">£{price}</p>
           <button
           onClick={()=>{
-            console.log(id)
+            
+            addItem(id)
           }}>
           <ShoppingBagIcon
           className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight"

@@ -2,11 +2,14 @@ import { useState, useEffect } from "react"
 import useAxios from "../utils/useAxios";
 import axios from "axios";
 
+
+
 function CalcTotal(subtotal, tax, shipping)
 {
   let x = subtotal + tax + shipping;
   return x;
 }
+
 
 
 const Cart = () => {
@@ -25,6 +28,15 @@ const Cart = () => {
       // timeout : 2000
     }
   });
+
+  async function removeItem(id)
+{
+  await axios
+  .delete(`https://burgundy-millipede-cuff.cyclic.app/cart/post/${id}`)
+  .then(() => {
+    refetch();
+  });
+}
 
   useEffect(() => { 
      
@@ -78,6 +90,7 @@ const Cart = () => {
                                       <button
                                         type="button"
                                         className="font-medium text-highlight hover:text-tertiary"
+                                        onClick={()=>{removeItem(product.id)}}
                                       >
                                         Remove
                                       </button>
