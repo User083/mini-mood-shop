@@ -29,14 +29,6 @@ const Cart = () => {
     }
   });
 
-  async function removeItem(id)
-{
-  await axios
-  .delete(`https://burgundy-millipede-cuff.cyclic.app/cart/post/${id}`)
-  .then(() => {
-    refetch();
-  });
-}
 
   useEffect(() => { 
      
@@ -90,7 +82,7 @@ const Cart = () => {
                                       <button
                                         type="button"
                                         className="font-medium text-highlight hover:text-tertiary"
-                                        onClick={()=>{removeItem(product.id)}}
+                                        onClick={()=>{}}
                                       >
                                         Remove
                                       </button>

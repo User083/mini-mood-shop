@@ -1,7 +1,6 @@
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import axios from "axios";
-import useAxios from "../utils/useAxios";
-import { useEffect, useState } from 'react';
+
 
 const ProductCard = ({id, title, price, image, category}) => {
 
@@ -22,7 +21,7 @@ const ProductCard = ({id, title, price, image, category}) => {
       }
     })
     .then((r) => {
-      
+      console.log(r.data)
     });
   }
 
