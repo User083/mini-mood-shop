@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom"
 import { cardigans } from "../constants"
 
-const Promo = () => {
+const Promo = (props) => {
     return (
         <div className="relative overflow-hidden w-full lg:py-10 pointer-events-none">
           <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40 ">
@@ -83,12 +84,15 @@ const Promo = () => {
                     </div>
                   </div>
     
-                  <a
-                    href="/store"
+                  <Link
+                    to={"/store"}
+                    onClick={()=>{
+                      props.setQuery("cardigans")
+                    }}
                     className="inline-block rounded-md border border-transparent bg-secondary px-8 py-3 text-center font-medium text-white hover:bg-highlight pointer-events-auto"
                   >
                     Shop Collection
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

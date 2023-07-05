@@ -9,7 +9,6 @@ import { useState } from 'react'
 function App() {
 
   const [query, setQuery] = useState("products");
-  console.log(query)
 
   return (
     <BrowserRouter>
