@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProductCard } from "../components"
 import axios from "axios";
 import useAxios from "../utils/useAxios";
@@ -10,6 +10,7 @@ import { loader } from "../assets";
 const ProductDisplay = ({query}) => {
  
   const [category, setCategory] = useState(query);
+
   const [result, error, loading, refetch] = useAxios({
     axiosInstance: axios.create({
       baseURL: "https://burgundy-millipede-cuff.cyclic.app/"
@@ -19,7 +20,13 @@ const ProductDisplay = ({query}) => {
     requestConfig: {
       // timeout : 2000
     }
-  });
+  });  
+  
+  //force update whenever a new query param is selected
+  useEffect(() => {
+    setCategory(query);
+    refetch();    
+  }, [query]);
 
     return(
         <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-screen">
