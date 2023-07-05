@@ -11,7 +11,7 @@ const Collections = (props) => {
                 <div className="mt-6 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">      
                 
                     {collections.map((item, index) => (
-                <CollectionCard key={item.id} id={item.id} index={index} {...props} collection={...item} />
+                <CollectionCard key={item.id} id={item.id} index={index} {...props} collection={item} />
             ))}
         
                 </div>           
