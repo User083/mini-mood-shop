@@ -9,10 +9,10 @@ import { collections } from "../constants";
 
 const ProductDisplay = ({query, title}) => {
  
-  const [category, setCategory] = useState(query);
+  const [category, setCategory] = useState("products");
   const [result, error, loading, refetch] = useAxios({
     axiosInstance: axios.create({
-      baseURL: "https://fakestoreapi.com/"
+      baseURL: "https://burgundy-millipede-cuff.cyclic.app/"
   }),
     method: 'GET',
     url: category,
@@ -20,6 +20,7 @@ const ProductDisplay = ({query, title}) => {
       // timeout : 2000
     }
   });
+  console.log(result)
     return(
 
         <div className="w-4/6 my-10 flex flex-col lg:px-10 md:px-4 min-h-screen">
@@ -27,15 +28,15 @@ const ProductDisplay = ({query, title}) => {
             <h2 className="text-primary font-bold mx-5 text-2xl">Products</h2>
             <div className="flex gap-5 flex-wrap sm:gap-2">
               <button onClick={()=>{
-              setCategory(collections[0].query); 
+              setCategory("women"); 
               refetch()}}
             className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Women's</button>
               <button onClick={()=>{
-              setCategory(collections[1].query); 
+              setCategory("men"); 
               refetch()}}
             className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Men's</button>
             <button onClick={()=>{
-              setCategory(collections[2].query); 
+              setCategory("accessories"); 
               refetch()}}
             className="bg-secondary rounded px-2 text-white hover:bg-tertiary w-[100px] focus:bg-highlight">Jewellery</button>
           </div>

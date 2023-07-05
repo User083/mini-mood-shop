@@ -1,5 +1,7 @@
 import { women, men, jewellery, cardigan1, cardigan2, cardigan3, cardigan4, cardigan5, cardigan6, cardigan7 } from "../assets";
 
+export const api = {url:"https://burgundy-millipede-cuff.cyclic.app/"}
+
 export const collections = [
     {
         id: "women",
