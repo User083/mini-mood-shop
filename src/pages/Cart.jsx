@@ -1,23 +1,12 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
+import { CartProduct } from "../components";
 
 function CalcTotal(subtotal, tax, shipping)
 {
   let x = subtotal + tax + shipping;
   return x;
 }
-
-function RemoveItem(array, index)
-{
- let newCart = array;
-  if(index > -1)
-  {
-    newCart.splice(index, 1)
-  }
-  return newCart;
-}
-
-
 
 const Cart = (props) => {
   
@@ -60,43 +49,14 @@ const Cart = (props) => {
                         <div className="flow-root border-b border-secondary pb-5">
                           <ul role="list" className="-my-6 divide-y divide-tertiary">
                             {products.map((product, index) => (                              
-                              <li key={product.id} className="flex py-6" index={index}>
-                                <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
-                                  <img
-                                    src={product.image}
-                                    alt={product.title}
-                                    className="h-full w-full object-cover object-center"
-                                  />
-                                </div>
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-primary">
-                                      <h3>
-                                        <a href={product.href}>{product.title}</a>
-                                      </h3>
-                                      <p className="ml-4">£{product.price}</p>
-                                    </div>
-                                    <p className="mt-1 text-sm text-secondary">{product.colors[0]}</p>
-                                  </div>
-                                  <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-secondary">Qty </p>
-
-                                    <div className="flex">
-                                      <button
-                                        type="button"
-                                        className="font-medium text-highlight hover:text-tertiary"
-                                        onClick={()=>{
-                                          setProducts(RemoveItem(products, index)
-                                          )  
-                                          props.setCounter(props.cart.length)                                       
-                                        }}
-                                      >
-                                        Remove
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
+                             <CartProduct 
+                             product={product} 
+                             index={index} 
+                             setProducts={setProducts} 
+                             products={products}
+                             key={product.id}
+                             setCounter={props.setCounter}
+                             cart={props.cart}/>
                             ))}
                           </ul>
                         </div>
