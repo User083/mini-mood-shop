@@ -45,7 +45,7 @@ const Cart = (props) => {
   setShipping(totalShipping)
   totalPrice = CalcTotal(productTotal, totalTax, totalShipping);
   setTotal(totalPrice)  
-}, [products]);
+});
 
 
 
