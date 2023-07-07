@@ -33,11 +33,16 @@ const Cart = (props) => {
     let productTotal = 0.00;
     let totalPrice = 0.00;
     let totalTax = 0.00;
-    let totalShipping = 5.00;
+    let totalShipping = 0.00;
+
    products.forEach(item => {
     productTotal = productTotal + parseFloat(item.price);  
   });
   setSubtotal(productTotal)
+  if(products.length > 0 && productTotal < 50.00)
+  {
+    totalShipping = 5.00
+  }
   totalTax = productTotal * 0.20;
   setTaxes(totalTax)
   setShipping(totalShipping)
