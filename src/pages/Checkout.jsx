@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Construction, AddressForm } from "../components"
+import { Link } from "react-router-dom";
 
 
 const Checkout = () => {
@@ -23,7 +24,7 @@ const [sameAddress, setSameAddress] = useState(false);
             <div className="flex items-center gap-2 mt-1">              
               <input type="checkbox" id="address" name="address" className="rounded focus:ring-highlight focus:checked:bg-highlight checked:hover:bg-tertiary checked:bg-highlight"
             onChange={()=>{setSameAddress(!sameAddress)}}/>
-              <label htmlForfor="address" className="text-sm leading-6 text-secondary">Same as shipping address?</label>
+              <label htmlFor="address" className="text-sm leading-6 text-secondary">Same as shipping address?</label>
 
             </div>
               {sameAddress ? <></> : <AddressForm/>}
@@ -31,9 +32,9 @@ const [sameAddress, setSameAddress] = useState(false);
         </div>
         </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <a className="text-sm font-semibold leading-6 text-primary" href="/cart">
+        <Link className="text-sm font-semibold leading-6 text-primary" to="/cart">
           Cancel
-        </a>
+        </Link>
         <button
           type="button"
           className="rounded-md bg-highlight px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

@@ -1,11 +1,10 @@
-import {Construction} from "../components"
 import { logo, girls, girls2 } from "../assets"
 
 const About = () => {
     return(
         <div className="min-h-screen w-full flex flex-col justify-start items-center py-5 mb-10 px-10 md:px-0">
             <div className="py-5 border-b mb-10 border-tertiary border-opacity-50 flex items-center justify-between w-full max-w-[1000px] gap-20">
-            <h className="font-title text-5xl font-medium">All About...</h>
+            <h1 className="font-title text-5xl font-medium">All About...</h1>
             <img src={logo} alt="Logo" className="max-w-[100px]"/>       
             </div>   
             
@@ -13,7 +12,7 @@ const About = () => {
             <section className="flex gap-10 md:flex-row flex-col items-center">
                 <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px] hover:rotate-3 hover:scale-105 group transition-all">
                 <img src={girls2} alt="Stock Photo" className="aspect-h-1 aspect-w-1 max-h-[500px] p-4"/>
-                <h className="font-medium text-4xl font-title pb-5 text-black">Two <span className="font-title group-hover:text-highlight transition-all">moody</span> sisters...</h>
+                <h1 className="font-medium text-4xl font-title pb-5 text-black">Two <span className="font-title group-hover:text-highlight transition-all">moody</span> sisters...</h1>
                 </div>
                 <div className="flex flex-col justify-around items-end">
                     <div className="flex flex-col gap-5 max-w-[500px] text-primary text-lg justify-center">
@@ -39,7 +38,7 @@ const About = () => {
                 <div className="flex flex-col items-center justify-center bg-[#ffffff] shadow-md max-w-[300px] hover:-rotate-3 hover:scale-105 group transition-all ">
                     
                     <img src={girls} alt="Stock Photo" className="aspect-h-1 aspect-w-1 max-h-[500px] p-4"/>
-                    <h className="font-medium text-4xl font-title pb-5 text-black ">...who love <span className="font-title group-hover:text-highlight transition-all">fashion</span></h>
+                    <h1 className="font-medium text-4xl font-title pb-5 text-black ">...who love <span className="font-title group-hover:text-highlight transition-all">fashion</span></h1>
                 </div>
             </section>
                     <div className="md:mt-[-20px]">

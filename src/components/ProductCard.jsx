@@ -1,51 +1,41 @@
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
-import axios from "axios";
 
 
-const ProductCard = ({id, title, price, image, category}) => {
 
-  async function addItem(id)
+const ProductCard = (props) => {
+
+  function UpdateCart(array, item)
   {
-    await axios({
-      method: 'POST',
-      url: `https://burgundy-millipede-cuff.cyclic.app/cart/`,
-      headers : {
-        "Content-Type": "application/json",
-      },
-      data: {
-          "id": id,
-    "title": title,
-    "price": price,
-    "image": image,
-    "category": category
-      }
-    })
-    .then((r) => {
-      console.log(r.data)
-    });
+    let newCart = array;
+    if(!array.includes(item))
+    {
+      newCart.push(item);
+    }
+    
+    return newCart;
   }
 
-
     return (
-        <div id={id} className="bg-secondary rounded my-5 md:max-w-[300px]">
+        <div id={props.product.id} className="bg-secondary rounded my-5 md:max-w-[300px]">
         <div className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
-          <img src={image} alt={title} className="bg-white hover:opacity-75"/>          
+          <img src={props.product.image} alt={props.product.title} className="bg-white hover:opacity-75"/>          
         </div>
         <div className="px-5 py-3 flex flex-col justify-between h-[100px] overflow-hidden">
           <div>
-            <h3 className="text-sm font-bold text-primary">{title}</h3>
-            <p className="text-sm text-tertiary">in: {category}</p> 
+            <h3 className="text-sm font-bold text-primary">{props.product.title}</h3>
+            <p className="text-sm text-tertiary">in: {props.product.category}</p> 
           </div>
         <div className="flex justify-between items-end">
 
-          <p className="text-lg font-medium text-white">£{price}</p>
+          <p className="text-lg font-medium text-white">£{props.product.price}</p>
           <button
           onClick={()=>{
             
-            addItem(id)
+            props.setCart(UpdateCart(props.cart, props.product))
+            props.setCounter(props.cart.length)
           }}>
           <ShoppingBagIcon
-          className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight"
+          className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight active:animate-bounce"
           aria-hidden="true"
          />
           </button>

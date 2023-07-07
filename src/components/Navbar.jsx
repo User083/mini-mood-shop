@@ -1,7 +1,7 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { navigation, collections } from '../constants'
+import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { navigation} from '../constants'
 import { logo } from '../assets'
 import { Link } from 'react-router-dom'
 
@@ -12,6 +12,7 @@ function classNames(...classes) {
 const Navbar = (props) => {
 
     const [open, setOpen] = useState(false)
+
 
     return (
         <div className="bg-white">
@@ -136,14 +137,14 @@ const Navbar = (props) => {
     
                   {/* Logo */}
                   <div className="ml-4 flex lg:ml-0">
-                    <a href="/">
+                    <Link to="/">
                       <span className="sr-only">MiniMood</span>
                       <img
                         className="h-8 w-auto"
                         src={logo}
                         alt="logo"
                       />
-                    </a>
+                    </Link>
                   </div>
     
                   {/* Flyout menus */}
@@ -226,13 +227,13 @@ const Navbar = (props) => {
                       ))}
     
                       {navigation.pages.map((page) => (
-                        <a
+                        <Link
                           key={page.name}
-                          href={page.href}
+                          to={page.href}
                           className="flex items-center text-sm font-medium text-primary hover:text-highlight"
                         >
                           {page.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </Popover.Group>
@@ -269,7 +270,7 @@ const Navbar = (props) => {
                           className="h-6 w-6 flex-shrink-0 text-tertiary group-hover:text-highlight"
                           aria-hidden="true"
                         />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{props.counter}</span>
                         <span className="sr-only">items in cart, view cart</span>
                       </Link>
                     </div>

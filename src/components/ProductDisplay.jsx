@@ -13,9 +13,9 @@ function classNames(...classes) {
 }
 
 
-const ProductDisplay = ({query}) => {
+const ProductDisplay = (props) => {
  
-  const [category, setCategory] = useState(query);
+  const [category, setCategory] = useState(props.query);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState();
 
@@ -34,9 +34,9 @@ const ProductDisplay = ({query}) => {
   });
   //force update whenever a new query param is selected
   useEffect(() => {
-    setCategory(query);
+    setCategory(props.query);
     refetch()  
-  }, [query]);
+  }, [props.query]);
 
     return(
 <div className="bg-white flex flex-col lg:px-10 md:px-4 min-h-screen w-full">
@@ -254,7 +254,7 @@ const ProductDisplay = ({query}) => {
           {!loading && error && <p className='text-secondary text-center font-medium'>{error}</p>}
           {!loading && !error && result &&  <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
                 {currentItems.map((product)=>(
-                  <ProductCard key={product.id} {...product}/>
+                  <ProductCard key={product.id} product={product} setCart={props.setCart} cart={props.cart} setCounter={props.setCounter}/>
                  ))}
           </div>}                
            </div>
