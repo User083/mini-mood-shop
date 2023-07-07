@@ -8,8 +8,16 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import {  FunnelIcon, MinusIcon, PlusIcon} from '@heroicons/react/20/solid'
 import { filters, sortOptions } from "../constants";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+function SortByPrice(array, direction)
+{
+  let newArray = [];
+  array.forEach(item => {
+    newArray.push(item)
+  });
+  direction === "price-high" ?
+    newArray.sort((a,b) => b.price - a.price)
+    : newArray.sort((a,b) => a.price - b.price)
+  return newArray;
 }
 
 
@@ -17,7 +25,7 @@ const ProductDisplay = (props) => {
  
   const [category, setCategory] = useState(props.query);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [currentItems, setCurrentItems] = useState();
+  const [currentItems, setCurrentItems] = useState([]);
 
   const [result, error, loading, refetch] = useAxios({
     axiosInstance: axios.create({
@@ -31,7 +39,7 @@ const ProductDisplay = (props) => {
   });  
   useEffect(() => { 
        setCurrentItems(result)
-  });
+  }, [result]);
   //force update whenever a new query param is selected
   useEffect(() => {
     setCategory(props.query);
@@ -182,7 +190,7 @@ const ProductDisplay = (props) => {
                                   defaultValue={option.value}
                                   type="radio"
                                   defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
                                   onChange={()=>{
                                     setCategory(option.value);  
                                     refetch();}}
@@ -201,9 +209,9 @@ const ProductDisplay = (props) => {
                     )}
                   </Disclosure>
                 ))}
-                         <h3 className="sr-only">Categories</h3>
+                         <h3 className="sr-only">Sort</h3>
                 {sortOptions.map((section) => (
-                  <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
+                  <Disclosure as="div" key={section.id} className="border-b border- py-6">
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
@@ -227,9 +235,11 @@ const ProductDisplay = (props) => {
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
                                   type="radio"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  onChange={()=>{}}
+                                  defaultChecked={false}
+                                  className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
+                                  onChange={()=>{
+                                    setCurrentItems(SortByPrice(currentItems, option.value))
+                                  }}
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}

@@ -135,6 +135,7 @@ const Cart = (props) => {
                         <p>Shipping</p>
                         <p>£{shipping}</p>
                       </div>
+                      <p className="text-tertiary text-sm italic">*UK only</p>
                       <div className="flex justify-between text-base text-secondary">
                         <p>Taxes</p>
                         <p>£{taxes}</p>
