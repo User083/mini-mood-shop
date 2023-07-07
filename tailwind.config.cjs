@@ -14,6 +14,10 @@ export default {
       fontFamily: {
         title: ['Photograph Signature']
       },
+      screens: {
+        'xs': '475px',
+        
+      }
     },
   },
   plugins: [
