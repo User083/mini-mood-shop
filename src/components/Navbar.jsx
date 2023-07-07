@@ -75,20 +75,31 @@ const Navbar = (props) => {
                       <Tab.Panels as={Fragment}>
                         {navigation.categories.map((category) => (
                           <Tab.Panel key={category.name} className="space-y-10 px-4 pb-8 pt-10">
-                            <div className="grid grid-cols-2 gap-x-4">
-                            </div>
-                       
-                              <div key={category.name}>
-                                <p id={`${category.id}-1-heading-mobile`} className="font-medium text-primary">
-                                  {category.name}
-                                </p>
-                                <ul
-                                  role="list"
-                                  aria-labelledby={`${category.id}-2-heading-mobile`}
-                                  className="mt-6 flex flex-col space-y-6"
-                                >
-                                </ul>
-                              </div>
+                             <div key={category.name}>
+                                              <ul
+                                                role="list"
+                                                aria-labelledby={`${category.name}-heading`}
+                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                              >
+                                                {category.items.map((item) => (
+                                                  <li key={item.name} className="flex">
+                                                    <Link
+                                                    to={item.href}>
+                                                    <button 
+                                                    onClick={()=>{
+                                                   
+                                                      props.setQuery(item.query);
+                                                      
+                                                    }}
+                                                    className="hover:text-highlight">
+                                                      {item.name}
+                                                    </button>
+                                                    </Link>
+   
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            </div>                     
                           </Tab.Panel>
                         ))}
                       </Tab.Panels>
@@ -106,15 +117,14 @@ const Navbar = (props) => {
 
     
                     <div className="border-t border-secondary px-4 py-6">
-                      <a href="#" className="-m-2 flex items-center p-2">
+                      <div className="-m-2 flex items-center p-2">
                         <img
                           src="https://tailwindui.com/img/flags/flag-united-kingdom.svg"
                           alt="flag"
                           className="block h-auto w-5 flex-shrink-0"
                         />
-                        <span className="ml-3 block text-base font-medium text-gray-900">GBP</span>
-                        <span className="sr-only">, change currency</span>
-                      </a>
+                        <span className="ml-3 block text-base font-medium text-primary">GBP</span>
+                      </div>
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>
