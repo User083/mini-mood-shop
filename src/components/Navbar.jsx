@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { navigation} from '../constants'
@@ -12,6 +12,7 @@ function classNames(...classes) {
 const Navbar = (props) => {
 
     const [open, setOpen] = useState(false)
+    const [openNav, setOpenNav] = useState(false)
 
 
     return (
@@ -89,6 +90,7 @@ const Navbar = (props) => {
                                                     onClick={()=>{
                                                    
                                                       props.setQuery(item.query);
+                                                      setOpen(false)
                                                       
                                                     }}
                                                     className="hover:text-highlight">
@@ -164,8 +166,12 @@ const Navbar = (props) => {
                         <Popover key={category.name} className="flex">
                           {({ open }) => (
                             <>
+                            
                               <div className="relative flex">
                                 <Popover.Button
+                                onClick={()=>{
+                                  setOpenNav(!openNav)
+                                }}
                                   className={classNames(
                                     open
                                       ? 'bg-highlight text-primary'
@@ -179,6 +185,7 @@ const Navbar = (props) => {
     
                               <Transition
                                 as={Fragment}
+                                show={openNav}
                                 enter="transition ease-out duration-200"
                                 enterFrom="opacity-0"
                                 enterTo="opacity-100"
@@ -186,7 +193,9 @@ const Navbar = (props) => {
                                 leaveFrom="opacity-100"
                                 leaveTo="opacity-0"
                               >
-                                <Popover.Panel className="absolute inset-x-0 top-full text-sm text-secondary">
+                                <Popover.Panel 
+                                
+                                className="absolute inset-x-0 top-full text-sm text-secondary">
                                   <div className="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
     
                                   <div className="relative bg-white">
@@ -205,15 +214,16 @@ const Navbar = (props) => {
                                                 aria-labelledby={`${category.name}-heading`}
                                                 className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                               >
-                                                {category.items.map((item) => (
+
+                                                  {category.items.map((item) => (
                                                   <li key={item.name} className="flex">
                                                     <Link
                                                     to={item.href}>
                                                     <button 
                                                     onClick={()=>{
-                                                   
-                                                      props.setQuery(item.query);
                                                       
+                                                      props.setQuery(item.query);
+                                                      setOpenNav(false)
                                                     }}
                                                     className="hover:text-highlight">
                                                       {item.name}
@@ -222,6 +232,7 @@ const Navbar = (props) => {
    
                                                   </li>
                                                 ))}
+                                              
                                               </ul>
                                             </div>
                                         
@@ -251,7 +262,7 @@ const Navbar = (props) => {
                   <div className="ml-auto flex items-center">
                         
                     <div className="hidden lg:ml-8 lg:flex">
-                      {/* <a href="#" className="flex items-center text-gray-700 hover:text-gray-800"> */}
+
                         <img
                           src="https://tailwindui.com/img/flags/flag-united-kingdom.svg"
                           alt=""
@@ -259,16 +270,8 @@ const Navbar = (props) => {
                         />
                         <span className="ml-3 block text-sm font-medium text-primary">GBP</span>
                         <span className="sr-only">, change currency</span>
-                      {/* </a> */}
+
                     </div>
-    
-                    {/* Search */}
-                    {/* <div className="flex lg:ml-6">
-                      <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                        <span className="sr-only">Search</span>
-                        <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                      </a>
-                    </div> */}
     
                     {/* Cart */}
                     <div className="ml-4 flow-root lg:ml-6 lg:flex gap-2 items-center">
