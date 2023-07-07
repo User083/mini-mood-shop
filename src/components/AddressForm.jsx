@@ -11,6 +11,7 @@ const AddressForm = () => {
                 type="text"
                 name="first-name"
                 id="first-name"
+                required
                 autoComplete="given-name"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
               />
@@ -26,6 +27,7 @@ const AddressForm = () => {
                 type="text"
                 name="last-name"
                 id="last-name"
+                required
                 autoComplete="family-name"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
               />
@@ -33,13 +35,14 @@ const AddressForm = () => {
           </div>
 
           <div className="sm:col-span-4">
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-primary">
+            <label htmlFor="email"  className="block text-sm font-medium leading-6 text-primary">
               Email address
             </label>
             <div className="mt-2">
               <input
                 id="email"
                 name="email"
+                required
                 type="email"
                 autoComplete="email"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
@@ -47,7 +50,7 @@ const AddressForm = () => {
             </div>
           </div>
 
-          <div className="sm:col-span-3">
+          {/* <div className="sm:col-span-3">
             <label htmlFor="country" className="block text-sm font-medium leading-6 text-primary">
               Country
             </label>
@@ -63,7 +66,7 @@ const AddressForm = () => {
                 <option>France</option>
               </select>
             </div>
-          </div>
+          </div> */}
 
           <div className="col-span-full">
             <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-primary">
@@ -74,6 +77,7 @@ const AddressForm = () => {
                 type="text"
                 name="street-address"
                 id="street-address"
+                required
                 autoComplete="street-address"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
               />
@@ -89,6 +93,7 @@ const AddressForm = () => {
                 type="text"
                 name="city"
                 id="city"
+                required
                 autoComplete="address-level2"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
               />
@@ -97,13 +102,14 @@ const AddressForm = () => {
 
           <div className="sm:col-span-2">
             <label htmlFor="region" className="block text-sm font-medium leading-6 text-primary">
-              State / Province
+              County
             </label>
             <div className="mt-2">
               <input
                 type="text"
                 name="region"
                 id="region"
+                required
                 autoComplete="address-level1"
                 className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
               />
@@ -113,13 +119,14 @@ const AddressForm = () => {
 
         <div className="sm:col-span-2">
           <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-primary">
-            ZIP / Postal code
+            Post Code
           </label>
           <div className="mt-2">
             <input
               type="text"
               name="postal-code"
               id="postal-code"
+              required
               autoComplete="postal-code"
               className="block w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary placeholder:text-primary focus:ring-2 focus:ring-inset focus:ring-highlight sm:text-sm sm:leading-6"
             />

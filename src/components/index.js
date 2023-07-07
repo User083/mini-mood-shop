@@ -7,5 +7,6 @@ import Promo from "./Promo";
 import Construction from "./Construction";
 import ProductDisplay from "./ProductDisplay";
 import AddressForm from "./AddressForm";
+import Popup from "./Popup";
 
-export {Navbar, Collections, ProductCard, CollectionCard, Footer, Promo, Construction, ProductDisplay, AddressForm}
+export {Navbar, Collections, ProductCard, CollectionCard, Footer, Promo, Construction, ProductDisplay, AddressForm, Popup}

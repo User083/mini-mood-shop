@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 
-
-
-
 function CalcTotal(subtotal, tax, shipping)
 {
   let x = subtotal + tax + shipping;
@@ -20,6 +17,8 @@ function RemoveItem(array, index)
   return newCart;
 }
 
+
+
 const Cart = (props) => {
   
   const [subtotal, setSubtotal] = useState(0.00);
@@ -27,7 +26,6 @@ const Cart = (props) => {
   const [shipping, setShipping] = useState(0.00);
   const [taxes, setTaxes] = useState(0.00);
   const [products, setProducts] = useState(props.cart);
-
 
 
   useEffect(() => { 
@@ -98,7 +96,7 @@ const Cart = (props) => {
                           </ul>
                         </div>
                       </div>
-          </div>       
+               
 
           {/* price and checkout */}
           <div className="rounded px-4 py-6 sm:px-6 border-[20px] shadow-md border-secondary min-w-[250px] max-w-[500px] w-full flex flex-col gap-2 mx-10 mt-0 lg:mt-10 h-full">
@@ -107,7 +105,7 @@ const Cart = (props) => {
               
               <h1 className="font-bold text-lg">Order Summary</h1>
             </div>
-            <div className="sm:col-span-3">
+            {/* <div className="sm:col-span-3">
             <label htmlFor="country" className="text-sm font-medium leading-6 text-primary">
               Country
             </label>
@@ -123,7 +121,8 @@ const Cart = (props) => {
                 <option>France</option>
               </select>
             </div>
-                      <div className="flex justify-between text-base font-medium text-primary">
+              </div>           */}
+              <div className="flex justify-between text-base font-medium text-primary">
                         <p>Subtotal</p>
                         <p>£{subtotal}</p>
                       </div>
@@ -140,12 +139,13 @@ const Cart = (props) => {
                         <p>£{total}</p>
                       </div>
                       <div className="mt-6 flex justify-center">
-                        <a
-                          href="/cart/checkout"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-highlight px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-tertiary"
+                        <Link
+                          to={products.length > 0 ? "/cart/checkout" : "/cart"}
+                          className={ products.length> 0? "bg-highlight hover:bg-tertiary flex items-center justify-center rounded py-4 px-4 text-white shadow-md": 
+                          "bg-tertiary flex items-center justify-center rounded py-4 px-4 text-white cursor-default"}
                         >
                           Checkout
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-primary">
                         <p>
