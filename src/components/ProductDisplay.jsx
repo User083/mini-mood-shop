@@ -44,7 +44,7 @@ const ProductDisplay = (props) => {
   }, [props.query]);
 
   return (
-    <div className="bg-white flex flex-col lg:px-10 md:px-4 min-h-screen w-full">
+    <article className="bg-white flex flex-col lg:px-10 md:px-4 min-h-screen w-full">
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -229,8 +229,8 @@ const ProductDisplay = (props) => {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
+        <article className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <section className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
             <h1 className="text-4xl font-bold tracking-tight text-primary">
               Products
             </h1>
@@ -245,7 +245,7 @@ const ProductDisplay = (props) => {
                 <FunnelIcon className="h-5 w-5" aria-hidden="true" />
               </button>
             </div>
-          </div>
+          </section>
 
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
@@ -410,9 +410,9 @@ const ProductDisplay = (props) => {
               </div>
             </div>
           </section>
-        </main>
+        </article>
       </div>
-    </div>
+    </article>
   );
 };
 

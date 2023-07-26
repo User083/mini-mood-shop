@@ -11,18 +11,18 @@ const ProductCard = (props) => {
   }
 
   return (
-    <div
+    <article
       id={props.product.id}
       className="bg-secondary rounded my-5 md:max-w-[300px]"
     >
-      <div className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
+      <span className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
         <img
           src={props.product.image}
           alt={props.product.title}
           className="bg-white hover:opacity-75"
         />
-      </div>
-      <div className="px-5 py-3 flex flex-col justify-between h-[100px] overflow-hidden">
+      </span>
+      <section className="px-5 py-3 flex flex-col justify-between h-[100px] overflow-hidden">
         <div>
           <h3 className="text-sm font-bold text-primary">
             {props.product.title}
@@ -34,19 +34,18 @@ const ProductCard = (props) => {
             £{props.product.price}
           </p>
           <button
+            aria-label="Add to cart"
+            type="button"
             onClick={() => {
               props.setCart(UpdateCart(props.cart, props.product));
               props.setCounter(props.cart.length);
             }}
           >
-            <ShoppingBagIcon
-              className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight active:animate-bounce"
-              aria-hidden="true"
-            />
+            <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight active:animate-bounce" />
           </button>
         </div>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

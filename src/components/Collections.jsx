@@ -3,9 +3,9 @@ import { CollectionCard } from "./index";
 
 const Collections = (props) => {
   return (
-    <div className="bg-highlight rounded xs:px-10 px-6">
+    <article className="bg-highlight rounded xs:px-10 px-6">
       <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 py-5 xs:px-1">
-        <div className="mx-auto max-w-2xl py-12 lg:max-w-none sm:max-w-[400px]">
+        <section className="mx-auto max-w-2xl py-12 lg:max-w-none sm:max-w-[400px]">
           <h2 className="text-2xl font-bold text-primary border-b border-secondary pb-5">
             Categories
           </h2>
@@ -20,9 +20,9 @@ const Collections = (props) => {
               />
             ))}
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </article>
   );
 };
 

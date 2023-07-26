@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const CollectionCard = (props) => {
   return (
-    <div className="group relative">
+    <article className="group relative">
       <div className=" shadow-md bg-[#ffffff] p-4 flex flex-col justify-center hover:rotate-3 hover:scale-105 transition-all">
-        <Link to={props.collection.link}>
+        <Link to={props.collection.link} aria-label="View collection">
           <div
             onClick={() => {
               props.setQuery(props.collection.query);
@@ -22,7 +22,7 @@ const CollectionCard = (props) => {
           </h3>
         </Link>
       </div>
-    </div>
+    </article>
   );
 };
 

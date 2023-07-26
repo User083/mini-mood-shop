@@ -21,7 +21,7 @@ function Decrease(a) {
 const CartProduct = (props) => {
   const [quantity, setQuantity] = useState(1);
   return (
-    <>
+    <article>
       <li className="flex py-6" index={props.index}>
         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
           <img
@@ -34,7 +34,9 @@ const CartProduct = (props) => {
           <div>
             <div className="flex justify-between text-base font-medium text-primary">
               <h3>
-                <a href={props.product.href}>{props.product.title}</a>
+                <a href={props.product.href} aria-label="Product info">
+                  {props.product.title}
+                </a>
               </h3>
               <p className="ml-4">£{props.product.price}</p>
             </div>
@@ -43,6 +45,7 @@ const CartProduct = (props) => {
           <div className="flex flex-1 items-end justify-between text-sm">
             <button
               type="button"
+              aria-label="Reduce quantity"
               className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
               onClick={() => {
                 setQuantity(Decrease(quantity));
@@ -54,6 +57,7 @@ const CartProduct = (props) => {
               <p className="text-secondary">{quantity}</p>
               <button
                 type="button"
+                aria-label="Add more"
                 className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
                 onClick={() => {
                   setQuantity(quantity + 1);
@@ -67,6 +71,7 @@ const CartProduct = (props) => {
               <button
                 type="button"
                 className="font-medium text-highlight hover:text-tertiary"
+                aria-label="Remove Item"
                 onClick={() => {
                   props.setProducts(RemoveItem(props.products, props.index));
                   props.setCounter(props.cart.length);
@@ -78,7 +83,7 @@ const CartProduct = (props) => {
           </div>
         </div>
       </li>
-    </>
+    </article>
   );
 };
 
