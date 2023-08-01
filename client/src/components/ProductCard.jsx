@@ -1,4 +1,5 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { AddToCart } from "../utils/APICalls";
 
 const ProductCard = (props) => {
   function UpdateCart(array, item) {
@@ -12,7 +13,7 @@ const ProductCard = (props) => {
 
   return (
     <article
-      id={props.product.id}
+      id={props.product._id}
       className="bg-secondary rounded my-5 md:max-w-[300px]"
     >
       <span className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
@@ -37,7 +38,8 @@ const ProductCard = (props) => {
             aria-label="Add to cart"
             type="button"
             onClick={() => {
-              props.setCart(UpdateCart(props.cart, props.product));
+              // props.setCart(UpdateCart(props.cart, props.product));
+              AddToCart(props.product);
               props.setCounter(props.cart.length);
             }}
           >

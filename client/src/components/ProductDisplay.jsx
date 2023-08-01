@@ -1,12 +1,11 @@
 import { useEffect, useState, Fragment } from "react";
 import { ProductCard } from "../components";
-import axios from "axios";
-import useAxios from "../utils/useAxios";
 import { loader } from "../assets";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FunnelIcon, MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { filters, sortOptions } from "../constants";
+import { GetAllProducts } from "../utils/APICalls";
 
 function SortByPrice(array, direction) {
   let newArray = [];
@@ -23,24 +22,14 @@ const ProductDisplay = (props) => {
   const [category, setCategory] = useState(props.query);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const [result, error, loading, refetch] = useAxios({
-    axiosInstance: axios.create({
-      baseURL: "https://burgundy-millipede-cuff.cyclic.app/",
-    }),
-    method: "GET",
-    url: category,
-    requestConfig: {
-      // timeout : 2000
-    },
-  });
   useEffect(() => {
-    setCurrentItems(result);
-  }, [result]);
+    GetAllProducts().then((res) => setCurrentItems(res));
+  }, []);
   //force update whenever a new query param is selected
   useEffect(() => {
     setCategory(props.query);
-    refetch();
   }, [props.query]);
 
   return (
@@ -137,7 +126,6 @@ const ProductDisplay = (props) => {
                                       className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
                                       onChange={() => {
                                         setCategory(option.value);
-                                        refetch();
                                       }}
                                     />
                                     <label
@@ -300,7 +288,6 @@ const ProductDisplay = (props) => {
                                   className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
                                   onChange={() => {
                                     setCategory(option.value);
-                                    refetch();
                                   }}
                                 />
                                 <label
@@ -388,12 +375,8 @@ const ProductDisplay = (props) => {
                   {loading && (
                     <img src={loader} className="animate-spin h-[50px]" />
                   )}
-                  {!loading && error && (
-                    <p className="text-secondary text-center font-medium">
-                      {error}
-                    </p>
-                  )}
-                  {!loading && !error && result && (
+
+                  {!loading && (
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
                       {currentItems.map((product) => (
                         <ProductCard

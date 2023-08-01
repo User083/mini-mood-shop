@@ -1,28 +1,112 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { CartProduct } from "../components";
+import { GetCart, RemoveFromCart, UpdateProduct } from "../utils/APICalls";
 
 function CalcTotal(subtotal, tax, shipping) {
   let x = subtotal + tax + shipping;
   return x;
 }
+function CheckQuantity(quantity) {
+  if (quantity - 1 < 1) {
+    return 1;
+  }
+
+  return quantity - 1;
+}
+
+const CartProduct = (props) => {
+  return (
+    <article>
+      <li className="flex py-6" index={props.index}>
+        <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
+          <img
+            src={props.product.image}
+            alt={props.product.title}
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+        <div className="ml-4 flex flex-1 flex-col">
+          <div>
+            <div className="flex justify-between text-base font-medium text-primary">
+              <h3>
+                <a href={props.product.href} aria-label="Product info">
+                  {props.product.title}
+                </a>
+              </h3>
+              <p className="ml-4">£{props.product.price}</p>
+            </div>
+          </div>
+          <div className="flex flex-1 items-end justify-between text-sm">
+            <button
+              type="button"
+              aria-label="Reduce quantity"
+              className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
+              onClick={() => {
+                UpdateProduct(
+                  props.product._id,
+                  CheckQuantity(props.product.quantity)
+                );
+              }}
+            >
+              -
+            </button>
+            <div className="flex gap-2 items-center">
+              <p className="text-secondary">{props.product.quantity}</p>
+              <button
+                type="button"
+                aria-label="Add more"
+                className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
+                onClick={() => {
+                  UpdateProduct(props.product._id, props.product.quantity + 1);
+                }}
+              >
+                +
+              </button>
+            </div>
+
+            <div className="flex">
+              <button
+                type="button"
+                className="font-medium text-highlight hover:text-tertiary"
+                aria-label="Remove Item"
+                onClick={() => {
+                  RemoveFromCart(props.product._id);
+                  props.setCounter(props.cart.length);
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </article>
+  );
+};
 
 const Cart = (props) => {
   const [subtotal, setSubtotal] = useState(0.0);
   const [total, setTotal] = useState(0.0);
   const [shipping, setShipping] = useState(0.0);
   const [taxes, setTaxes] = useState(0.0);
-  const [products, setProducts] = useState(props.cart);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    props.setCart(products);
+    GetCart().then((res) => setProducts(res));
+  }, []);
+
+  useEffect(() => {
+    GetCart().then((res) => setProducts(res));
+  }, [products]);
+
+  useEffect(() => {
     let productTotal = 0.0;
     let totalPrice = 0.0;
     let totalTax = 0.0;
     let totalShipping = 0.0;
 
     products.forEach((item) => {
-      productTotal = productTotal + parseFloat(item.price);
+      productTotal = productTotal + parseFloat(item.price * item.quantity);
     });
     setSubtotal(productTotal);
     if (products.length > 0 && productTotal < 50.0) {
@@ -48,7 +132,7 @@ const Cart = (props) => {
                   index={index}
                   setProducts={setProducts}
                   products={products}
-                  key={product.id}
+                  key={product._id}
                   setCounter={props.setCounter}
                   cart={props.cart}
                 />
@@ -62,23 +146,6 @@ const Cart = (props) => {
           <div className="border-b py-2 border-secondary">
             <h1 className="font-bold text-lg">Order Summary</h1>
           </div>
-          {/* <div className="sm:col-span-3">
-            <label htmlFor="country" className="text-sm font-medium leading-6 text-primary">
-              Country
-            </label>
-            <div className="mt-2">
-              <select
-                id="country"
-                name="country"
-                autoComplete="country-name"
-                className="w-full rounded-md border-0 py-1.5 text-primary shadow-sm ring-1 ring-inset ring-tertiary focus:ring-2 focus:ring-inset focus:ring-highlight sm:max-w-xs sm:text-sm sm:leading-6"
-              >
-                <option>United Kingdom</option>
-                <option>Ireland</option>
-                <option>France</option>
-              </select>
-            </div>
-              </div>           */}
           <div className="flex justify-between text-base font-medium text-primary">
             <p>Subtotal</p>
             <p>£{subtotal}</p>
