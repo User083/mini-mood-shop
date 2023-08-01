@@ -13,6 +13,15 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primary: "#463F3A",
+        secondary: "#8A817C",
+        tertiary: "#BCB8B1",
+        highlight: "#E0AFA0",
+        black: "#0B0A09",
+        white: "#F4F3EE",
+      },
+
       fontFamily: {
         title: ["Photograph Signature"],
       },
