@@ -4,8 +4,12 @@ import { loader } from "../assets";
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FunnelIcon, MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { filters, sortOptions } from "../constants";
-import { GetAllProducts } from "../utils/APICalls";
+import { categories, filters, sortOptions } from "../constants";
+import {
+  GetAllProducts,
+  GetProductsByCategory,
+  GetProductsByCategoryFiltered,
+} from "../utils/APICalls";
 
 function SortByPrice(array, direction) {
   let newArray = [];
@@ -23,11 +27,45 @@ const ProductDisplay = (props) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filter, setFilter] = useState(props.filter);
 
   useEffect(() => {
-    GetAllProducts().then((res) => setCurrentItems(res));
-  }, []);
-  //force update whenever a new query param is selected
+    setLoading(true);
+    switch (category) {
+      case "products":
+        GetAllProducts().then((res) => {
+          setCurrentItems(res);
+          setLoading(false);
+        });
+        break;
+      case "clothing":
+        if (filter == "") {
+          GetProductsByCategory(category).then((res) => {
+            setCurrentItems(res);
+            setLoading(false);
+          });
+        } else {
+          GetProductsByCategoryFiltered(category, props.filter).then((res) => {
+            setCurrentItems(res);
+            setLoading(false);
+          });
+        }
+
+        break;
+      case "accessories":
+        GetProductsByCategory(category).then((res) => {
+          setCurrentItems(res);
+          setLoading(false);
+        });
+        break;
+      default:
+        GetAllProducts().then((res) => {
+          setCurrentItems(res);
+          setLoading(false);
+        });
+    }
+  }, [category, filter]);
+
   useEffect(() => {
     setCategory(props.query);
   }, [props.query]);
@@ -82,7 +120,7 @@ const ProductDisplay = (props) => {
                   {/* Filters */}
                   <form className="mt-4 border-t border-gray-200">
                     <h3 className="sr-only">Categories</h3>
-                    {filters.map((section) => (
+                    {categories.map((section) => (
                       <Disclosure
                         as="div"
                         key={section.id}
@@ -243,67 +281,134 @@ const ProductDisplay = (props) => {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
-                {filters.map((section) => (
-                  <Disclosure
-                    as="div"
-                    key={section.id}
-                    className="border-b border-gray-200 py-6"
-                  >
-                    {({ open }) => (
-                      <>
-                        <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-secondary hover:text-gray-500">
-                            <span className="font-medium text-primary">
-                              {section.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="h-5 w-5"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div
-                                key={option.value}
-                                className="flex items-center"
-                              >
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="radio"
-                                  defaultChecked={option.checked}
-                                  className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
-                                  onChange={() => {
-                                    setCategory(option.value);
-                                  }}
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600"
+                <section>
+                  <h3 className="sr-only">Categories</h3>
+                  {categories.map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.id}
+                      className="border-b border-gray-200 py-6"
+                    >
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-secondary hover:text-gray-500">
+                              <span className="font-medium text-primary">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
                                 >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    defaultChecked={option.checked}
+                                    className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
+                                    onChange={() => {
+                                      setCategory(option.value);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </section>
+
+                <section>
+                  <h3 className="sr-only">Filters</h3>
+                  {filters.map((section) => (
+                    <Disclosure
+                      as="div"
+                      key={section.id}
+                      className="border-b border-gray-200 py-6"
+                    >
+                      {({ open }) => (
+                        <>
+                          <h3 className="-my-3 flow-root">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-secondary hover:text-gray-500">
+                              <span className="font-medium text-primary">
+                                {section.name}
+                              </span>
+                              <span className="ml-6 flex items-center">
+                                {open ? (
+                                  <MinusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                ) : (
+                                  <PlusIcon
+                                    className="h-5 w-5"
+                                    aria-hidden="true"
+                                  />
+                                )}
+                              </span>
+                            </Disclosure.Button>
+                          </h3>
+                          <Disclosure.Panel className="pt-6">
+                            <div className="space-y-4">
+                              {section.options.map((option, optionIdx) => (
+                                <div
+                                  key={option.value}
+                                  className="flex items-center"
+                                >
+                                  <input
+                                    id={`filter-${section.id}-${optionIdx}`}
+                                    name={`${section.id}[]`}
+                                    defaultValue={option.value}
+                                    type="radio"
+                                    defaultChecked={option.checked}
+                                    className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
+                                    onChange={() => {
+                                      setFilter(`${option.value}`);
+                                    }}
+                                  />
+                                  <label
+                                    htmlFor={`filter-${section.id}-${optionIdx}`}
+                                    className="ml-3 text-sm text-gray-600"
+                                  >
+                                    {option.label}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+                  ))}
+                </section>
+
                 <h3 className="sr-only">Sort</h3>
                 {sortOptions.map((section) => (
                   <Disclosure

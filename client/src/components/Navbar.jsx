@@ -94,7 +94,6 @@ const Navbar = (props) => {
                                 <Link to={item.href}>
                                   <button
                                     onClick={() => {
-                                      props.setQuery(item.query);
                                       setOpen(false);
                                     }}
                                     className="hover:text-highlight"
@@ -230,7 +229,6 @@ const Navbar = (props) => {
                                               <Link to={item.href}>
                                                 <button
                                                   onClick={() => {
-                                                    props.setQuery(item.query);
                                                     setOpenNav(false);
                                                   }}
                                                   className="hover:text-highlight"

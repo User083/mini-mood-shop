@@ -14,14 +14,14 @@ function CheckQuantity(quantity) {
   return quantity - 1;
 }
 
-const CartProduct = (props) => {
+const CartProduct = ({ index, image, title, href, price, _id, quantity }) => {
   return (
     <article>
-      <li className="flex py-6" index={props.index}>
+      <li className="flex py-6" index={index}>
         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
           <img
-            src={props.product.image}
-            alt={props.product.title}
+            src={image}
+            alt={title}
             className="h-full w-full object-cover object-center"
           />
         </div>
@@ -29,35 +29,33 @@ const CartProduct = (props) => {
           <div>
             <div className="flex justify-between text-base font-medium text-primary">
               <h3>
-                <a href={props.product.href} aria-label="Product info">
-                  {props.product.title}
+                <a href={href} aria-label="Product info">
+                  {title}
                 </a>
               </h3>
-              <p className="ml-4">£{props.product.price}</p>
+              <p className="ml-4">£{price}</p>
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <button
-              type="button"
-              aria-label="Reduce quantity"
-              className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
-              onClick={() => {
-                UpdateProduct(
-                  props.product._id,
-                  CheckQuantity(props.product.quantity)
-                );
-              }}
-            >
-              -
-            </button>
             <div className="flex gap-2 items-center">
-              <p className="text-secondary">{props.product.quantity}</p>
+              <button
+                type="button"
+                aria-label="Reduce quantity"
+                className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
+                onClick={() => {
+                  UpdateProduct(_id, CheckQuantity(quantity));
+                }}
+              >
+                -
+              </button>
+
+              <p className="text-secondary">{quantity}</p>
               <button
                 type="button"
                 aria-label="Add more"
                 className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
                 onClick={() => {
-                  UpdateProduct(props.product._id, props.product.quantity + 1);
+                  UpdateProduct(_id, quantity + 1);
                 }}
               >
                 +
@@ -70,8 +68,7 @@ const CartProduct = (props) => {
                 className="font-medium text-highlight hover:text-tertiary"
                 aria-label="Remove Item"
                 onClick={() => {
-                  RemoveFromCart(props.product._id);
-                  props.setCounter(props.cart.length);
+                  RemoveFromCart(_id);
                 }}
               >
                 Remove
@@ -93,10 +90,12 @@ const Cart = (props) => {
 
   useEffect(() => {
     GetCart().then((res) => setProducts(res));
+    props.setCounter[products.length];
   }, []);
 
   useEffect(() => {
     GetCart().then((res) => setProducts(res));
+    props.setCounter[products.length];
   }, [products]);
 
   useEffect(() => {
@@ -127,15 +126,7 @@ const Cart = (props) => {
           <div className="flow-root border-b border-secondary pb-5">
             <ul role="list" className="-my-6 divide-y divide-tertiary">
               {products.map((product, index) => (
-                <CartProduct
-                  product={product}
-                  index={index}
-                  setProducts={setProducts}
-                  products={products}
-                  key={product._id}
-                  setCounter={props.setCounter}
-                  cart={props.cart}
-                />
+                <CartProduct index={index} key={product._id} {...product} />
               ))}
             </ul>
           </div>

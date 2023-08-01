@@ -6,7 +6,6 @@ const BASE_URL = "http://localhost:8000";
 export async function GetAllProducts() {
   function getAllProducts() {
     return Axios.get(`${BASE_URL}/products`).then((res) => {
-      console.log(res);
       return res.data;
     });
   }
@@ -20,6 +19,26 @@ export async function GetProduct(id) {
     });
   }
   return await getProduct();
+}
+
+export async function GetProductsByCategory(category) {
+  function getProductsByCategory() {
+    return Axios.get(`${BASE_URL}/products/${category}`).then((res) => {
+      return res.data;
+    });
+  }
+  return await getProductsByCategory();
+}
+
+export async function GetProductsByCategoryFiltered(category, filter) {
+  function getProductsByCategory() {
+    return Axios.get(`${BASE_URL}/products/${category}--${filter}`).then(
+      (res) => {
+        return res.data;
+      }
+    );
+  }
+  return await getProductsByCategory();
 }
 
 export async function UpdateProduct(id, qty) {

@@ -2,15 +2,6 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { AddToCart } from "../utils/APICalls";
 
 const ProductCard = (props) => {
-  function UpdateCart(array, item) {
-    let newCart = array;
-    if (!array.includes(item)) {
-      newCart.push(item);
-    }
-
-    return newCart;
-  }
-
   return (
     <article
       id={props.product._id}
@@ -38,7 +29,6 @@ const ProductCard = (props) => {
             aria-label="Add to cart"
             type="button"
             onClick={() => {
-              // props.setCart(UpdateCart(props.cart, props.product));
               AddToCart(props.product);
               props.setCounter(props.cart.length);
             }}

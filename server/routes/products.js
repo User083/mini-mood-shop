@@ -12,6 +12,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:category", async (req, res) => {
+  const category = req.params.category.split("--")[0];
+  const filter = req.params.category.split("--").pop();
+  let products;
+  try {
+    if (filter != category) {
+      products = await Products.find({
+        category: `${category}`,
+        collections: `${filter}`,
+      });
+    } else {
+      products = await Products.find({
+        category: `${category}`,
+      });
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 //GET product by ID
 router.get("/:id", getProduct, async (req, res) => {
   try {
