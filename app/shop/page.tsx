@@ -1,8 +1,13 @@
+import { ProductDisplay } from "@/components";
 
 const Shop = () => {
   return (
-    <article><section></section></article>
-  )
-}
+    <article className="w-full h-full ">
+      <section>
+        <ProductDisplay />
+      </section>
+    </article>
+  );
+};
 
-export default Shop
+export default Shop;
