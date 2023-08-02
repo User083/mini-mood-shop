@@ -2,6 +2,10 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { AddToCart } from "../utils/APICalls";
 
 const ProductCard = (props) => {
+  const convertedImage = btoa(
+    String.fromCharCode(...new Uint8Array(props.product.image.data.data))
+  );
+
   return (
     <article
       id={props.product._id}
@@ -9,7 +13,7 @@ const ProductCard = (props) => {
     >
       <span className="aspect-h-1 aspect-w-1 h-[350px] overflow-hidden rounded-t py-5 flex items-center ">
         <img
-          src={props.product.image}
+          src={`data:image/png;base64,${convertedImage}`}
           alt={props.product.title}
           className="bg-white hover:opacity-75"
         />
