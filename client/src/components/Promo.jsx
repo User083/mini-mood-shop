@@ -87,7 +87,7 @@ const Promo = (props) => {
               </div>
 
               <Link
-                to={"/store/clothing--cardigan"}
+                to={"/store/clothing--cardigans"}
                 aria-label="Shop collection"
                 className="inline-block rounded-md border border-transparent bg-secondary px-8 py-3 text-center font-medium text-white hover:bg-highlight pointer-events-auto"
               >

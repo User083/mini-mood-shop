@@ -83,11 +83,4 @@ async function getProduct(req, res, next) {
   next();
 }
 
-function convertImage(products) {
-  return products.map((product) => ({
-    image: btoa(String.fromCharCode(...new Uint8Array(image.image.data.data))),
-    ...product,
-  }));
-}
-
 module.exports = router;

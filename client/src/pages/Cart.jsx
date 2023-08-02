@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { GetCart, RemoveFromCart, UpdateProduct } from "../utils/APICalls";
+import {
+  GetCart,
+  RemoveFromCart,
+  UpdateProduct,
+  GetProduct,
+} from "../utils/APICalls";
 
 function CalcTotal(subtotal, tax, shipping) {
   let x = subtotal + tax + shipping;
@@ -23,7 +28,22 @@ function convertImage(data) {
   return btoa(binary);
 }
 
-const CartProduct = ({ index, image, title, href, price, _id, quantity }) => {
+const CartProduct = ({
+  index,
+
+  quantity,
+  item,
+  title,
+  href,
+  price,
+  _id,
+  image,
+}) => {
+  //Add a 'get by id' for each item
+  useEffect(() => {
+    console.log(item);
+    GetProduct(item).then((res) => console.log(res));
+  }, []);
   const convertedImage = convertImage(image);
   return (
     <article>

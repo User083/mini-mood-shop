@@ -15,7 +15,7 @@ export async function GetAllProducts() {
 export async function GetProduct(id) {
   function getProduct() {
     return Axios.get(`${BASE_URL}/products/${id}`).then((res) => {
-      return res.data;
+      return res.data[0];
     });
   }
   return await getProduct();
@@ -65,15 +65,10 @@ export async function GetCart() {
 
 export async function AddToCart(item) {
   function addToCart() {
-    return Axios.post(
-      `${BASE_URL}/cart`,
-      { ...item },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    return Axios.post(`${BASE_URL}/cart`, {
+      item: item._id,
+      quantity: 1,
+    })
       .then((res) => {
         return res.data;
       })

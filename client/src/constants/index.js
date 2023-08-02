@@ -101,8 +101,8 @@ export const filters = [
       { value: "men", label: "Men", checked: false },
       { value: "summer", label: "Summer", checked: false },
       { value: "winter", label: "Winter", checked: false },
-      { value: "trousers", label: "trousers", checked: false },
-      { value: "dresses", label: "dresses", checked: false },
+      { value: "trousers", label: "Trousers", checked: false },
+      { value: "dresses", label: "Dresses", checked: false },
     ],
   },
 ];

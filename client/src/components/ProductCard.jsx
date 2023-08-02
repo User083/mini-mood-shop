@@ -41,7 +41,7 @@ const ProductCard = (props) => {
             type="button"
             onClick={() => {
               AddToCart(props.product);
-              props.setCounter(props.cart.length);
+              // props.setCounter(props.cart.length);
             }}
           >
             <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight active:animate-bounce" />

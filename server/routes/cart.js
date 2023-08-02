@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Cart = require("../model/cart");
+const upload = require("../middleware/multer");
 
 //GET all
 router.get("/", async (req, res) => {
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 //POST new
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   const product = new Cart({
     ...req.body,
   });
