@@ -96,11 +96,13 @@ export const filters = [
     id: "filters",
     name: "Filters",
     options: [
-      { value: "cardigan", label: "Cardigans", checked: false },
+      { value: "cardigans", label: "Cardigans", checked: false },
       { value: "women", label: "Women", checked: false },
       { value: "men", label: "Men", checked: false },
       { value: "summer", label: "Summer", checked: false },
       { value: "winter", label: "Winter", checked: false },
+      { value: "trousers", label: "trousers", checked: false },
+      { value: "dresses", label: "dresses", checked: false },
     ],
   },
 ];

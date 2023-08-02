@@ -8,6 +8,7 @@ const fs = require("fs");
 router.get("/", async (req, res) => {
   try {
     const products = await Products.find();
+
     res.status(200).json(products);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -80,6 +81,13 @@ async function getProduct(req, res, next) {
 
   res.product = product;
   next();
+}
+
+function convertImage(products) {
+  return products.map((product) => ({
+    image: btoa(String.fromCharCode(...new Uint8Array(image.image.data.data))),
+    ...product,
+  }));
 }
 
 module.exports = router;

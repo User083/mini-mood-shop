@@ -13,14 +13,24 @@ function CheckQuantity(quantity) {
 
   return quantity - 1;
 }
+function convertImage(data) {
+  let binary = "";
+  let bytes = new Uint8Array(data);
+  let len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
 
 const CartProduct = ({ index, image, title, href, price, _id, quantity }) => {
+  const convertedImage = convertImage(image);
   return (
     <article>
       <li className="flex py-6" index={index}>
         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
           <img
-            src={image}
+            src={`data:image/png;base64,${convertedImage}`}
             alt={title}
             className="h-full w-full object-cover object-center"
           />
@@ -170,7 +180,7 @@ const Cart = (props) => {
             <p>
               or &nbsp;
               <Link
-                to="/store"
+                to="/store/products"
                 className="font-medium text-highlight hover:text-black"
               >
                 Continue Shopping

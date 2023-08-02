@@ -1,10 +1,17 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { AddToCart } from "../utils/APICalls";
 
+function convertImage(data) {
+  let binary = "";
+  let bytes = new Uint8Array(data);
+  let len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
 const ProductCard = (props) => {
-  const convertedImage = btoa(
-    String.fromCharCode(...new Uint8Array(props.product.image.data.data))
-  );
+  const convertedImage = convertImage(props.product.image.data.data);
 
   return (
     <article

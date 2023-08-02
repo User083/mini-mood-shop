@@ -5,12 +5,7 @@ const CollectionCard = (props) => {
     <article className="group relative">
       <div className=" shadow-md bg-[#ffffff] p-4 flex flex-col justify-center hover:rotate-3 hover:scale-105 transition-all">
         <Link to={props.collection.link} aria-label="View collection">
-          <div
-            onClick={() => {
-              props.setQuery(props.collection.query);
-            }}
-            className="relative h-80 w-full overflow-hidden sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64"
-          >
+          <div className="relative h-80 w-full overflow-hidden sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
             <img
               src={props.collection.image}
               alt={props.collection.title}

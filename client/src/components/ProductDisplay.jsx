@@ -31,6 +31,7 @@ const ProductDisplay = (props) => {
 
   useEffect(() => {
     setLoading(true);
+
     switch (category) {
       case "products":
         GetAllProducts().then((res) => {
@@ -39,7 +40,7 @@ const ProductDisplay = (props) => {
         });
         break;
       case "clothing":
-        if (filter == "") {
+        if (filter == category) {
           GetProductsByCategory(category).then((res) => {
             setCurrentItems(res);
             setLoading(false);
@@ -52,23 +53,19 @@ const ProductDisplay = (props) => {
         }
 
         break;
+
       case "accessories":
         GetProductsByCategory(category).then((res) => {
+          console.log(res);
           setCurrentItems(res);
           setLoading(false);
         });
+
         break;
       default:
-        GetAllProducts().then((res) => {
-          setCurrentItems(res);
-          setLoading(false);
-        });
     }
-  }, [category, filter]);
-
-  useEffect(() => {
-    setCategory(props.query);
-  }, [props.query]);
+    return;
+  }, []);
 
   return (
     <article className="bg-white flex flex-col lg:px-10 md:px-4 min-h-screen w-full">
@@ -485,7 +482,7 @@ const ProductDisplay = (props) => {
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
                       {currentItems.map((product) => (
                         <ProductCard
-                          key={product.id}
+                          key={product._id}
                           product={product}
                           setCart={props.setCart}
                           cart={props.cart}
