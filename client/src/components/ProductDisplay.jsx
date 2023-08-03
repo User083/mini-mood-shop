@@ -1,6 +1,6 @@
 import { useEffect, useState, Fragment } from "react";
-import { ProductCard } from "../components";
-import { loader } from "../assets";
+import { Loader, ProductCard } from "../components";
+
 import { Dialog, Disclosure, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FunnelIcon, MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
@@ -474,9 +474,7 @@ const ProductDisplay = (props) => {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="w-full flex items-center justify-center min-h-[400px]">
-                  {loading && (
-                    <img src={loader} className="animate-spin h-[50px]" />
-                  )}
+                  {loading && <Loader />}
 
                   {!loading && (
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">

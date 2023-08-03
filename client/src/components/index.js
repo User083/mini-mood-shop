@@ -7,6 +7,7 @@ import Promo from "./Promo";
 import Construction from "./Construction";
 import ProductDisplay from "./ProductDisplay";
 import AddressForm from "./AddressForm";
+import Loader from "./Loader";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   Construction,
   ProductDisplay,
   AddressForm,
+  Loader,
 };

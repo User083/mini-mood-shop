@@ -12,10 +12,12 @@ export async function GetAllProducts() {
   return await getAllProducts();
 }
 
+//GET single product by ID
+
 export async function GetProduct(id) {
   function getProduct() {
-    return Axios.get(`${BASE_URL}/products/${id}`).then((res) => {
-      return res.data[0];
+    return Axios.get(`${BASE_URL}/products/product/${id}`).then((res) => {
+      return res.data;
     });
   }
   return await getProduct();
@@ -67,6 +69,7 @@ export async function AddToCart(item) {
   function addToCart() {
     return Axios.post(`${BASE_URL}/cart`, {
       item: item._id,
+      price: item.price,
       quantity: 1,
     })
       .then((res) => {

@@ -31,7 +31,8 @@ router.patch("/:id", async (req, res) => {
     const result = await Cart.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
-    res.status(204).json(result);
+
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

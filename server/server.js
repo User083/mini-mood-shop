@@ -24,7 +24,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/products", productsRouter);
-app.use("/products/:id", productsRouter);
 app.use("/cart", cartRouter);
 
 connect();
