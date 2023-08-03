@@ -27,44 +27,64 @@ const ProductDisplay = (props) => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [currentItems, setCurrentItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filtering, setFiltering] = useState(false);
   const [filter, setFilter] = useState(props.filter);
+  const [trigger, setTrigger] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    try {
+      switch (category) {
+        case "products":
+          GetAllProducts().then((res) => {
+            setCurrentItems(res);
+            setFilter("");
+          });
+          break;
+        case "clothing":
+          if (filter == "") {
+            GetProductsByCategory(category).then((res) => {
+              setCurrentItems(res);
+            });
+          } else {
+            GetProductsByCategoryFiltered(category, props.filter).then(
+              (res) => {
+                setCurrentItems(res);
+                setFilter("");
+              }
+            );
+          }
 
-    switch (category) {
-      case "products":
-        GetAllProducts().then((res) => {
-          setCurrentItems(res);
-          setLoading(false);
-        });
-        break;
-      case "clothing":
-        if (filter == category) {
+          break;
+
+        case "accessories":
           GetProductsByCategory(category).then((res) => {
             setCurrentItems(res);
-            setLoading(false);
+            setFilter("");
           });
-        } else {
-          GetProductsByCategoryFiltered(category, props.filter).then((res) => {
-            setCurrentItems(res);
-            setLoading(false);
-          });
-        }
 
-        break;
-
-      case "accessories":
-        GetProductsByCategory(category).then((res) => {
-          setCurrentItems(res);
-          setLoading(false);
-        });
-
-        break;
-      default:
+          break;
+        default:
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
+
     return;
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    setFiltering(true);
+
+    GetProductsByCategoryFiltered(category, filter)
+      .then((res) => {
+        setCurrentItems(res);
+      })
+
+      .catch((error) => console.log(error))
+      .finally(setFiltering(false));
+  }, [trigger, category]);
 
   return (
     <article className="bg-white flex flex-col lg:px-10 md:px-4 min-h-screen w-full">
@@ -148,7 +168,7 @@ const ProductDisplay = (props) => {
                               <div className="space-y-6">
                                 {section.options.map((option, optionIdx) => (
                                   <div
-                                    key={option.value}
+                                    key={option.label}
                                     className="flex items-center"
                                   >
                                     <input
@@ -311,7 +331,7 @@ const ProductDisplay = (props) => {
                             <div className="space-y-4">
                               {section.options.map((option, optionIdx) => (
                                 <div
-                                  key={option.value}
+                                  key={option.label}
                                   className="flex items-center"
                                 >
                                   <input
@@ -387,6 +407,7 @@ const ProductDisplay = (props) => {
                                     className="h-4 w-4 rounded border-tertiary text-highlight focus:ring-highlight"
                                     onChange={() => {
                                       setFilter(`${option.value}`);
+                                      setTrigger((prev) => !prev);
                                     }}
                                   />
                                   <label
@@ -473,14 +494,20 @@ const ProductDisplay = (props) => {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="w-full flex items-center justify-center min-h-[400px]">
-                  {loading && <Loader />}
-
-                  {!loading && (
-                    <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
-                      {currentItems.map((product) => (
-                        <ProductCard key={product._id} product={product} />
-                      ))}
-                    </div>
+                  {loading || filtering ? (
+                    <Loader />
+                  ) : (
+                    <>
+                      {" "}
+                      {currentItems.length > 0 && (
+                        <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
+                          {currentItems.map((product) => (
+                            <ProductCard key={product._id} product={product} />
+                          ))}
+                        </div>
+                      )}
+                      {currentItems.length < 1 && <p>No results</p>}
+                    </>
                   )}
                 </div>
               </div>
