@@ -34,101 +34,111 @@ const CartProduct = ({ index, quantity, item, _id, setProducts }) => {
   const [product, setProduct] = useState({});
   const [convertedImage, setConvertedImage] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadImage, setLoadImage] = useState(false);
   const [qty, setQty] = useState(quantity);
+
   useEffect(() => {
     setLoading(true);
-    try {
-      GetProduct(item)
-        .then((res) => {
-          setProduct(res);
-        })
-        .then(() => convertImage(product.image.data.data))
-        .then((res) => {
-          setConvertedImage(res);
-        });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    setLoadImage(true);
+    GetProduct(item)
+      .then((res) => {
+        setProduct(res);
+      })
 
-    return;
+      .catch((err) => console.log(err))
+      .finally(setLoading(false));
   }, []);
+
+  useEffect(() => {
+    try {
+      setConvertedImage(convertImage(product.image));
+    } catch (error) {
+    } finally {
+      setLoadImage(false);
+    }
+  }, [product]);
   //
   return (
     <article>
-      {loading && <Loader />}
-      {!loading && (
-        <li className="flex py-6" index={index}>
-          <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
-            <img
-              src={`data:image/png;base64,${convertedImage}`}
-              alt={product.title}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="ml-4 flex flex-1 flex-col">
-            <div>
-              <div className="flex justify-between text-base font-medium text-primary">
-                <h3>
-                  <a
-                    href={`/products/product/${product._id}`}
-                    aria-label="Product info"
+      <li className="flex py-6" index={index}>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded border border-white">
+              {loadImage ? (
+                <Loader />
+              ) : (
+                <img
+                  src={`data:image/png;base64,${convertedImage}`}
+                  alt={product.title}
+                  className="h-full w-full object-cover object-center"
+                />
+              )}
+            </div>
+            <div className="ml-4 flex flex-1 flex-col">
+              <div>
+                <div className="flex justify-between text-base font-medium text-primary">
+                  <h3>
+                    <a
+                      href={`/products/product/${product._id}`}
+                      aria-label="Product info"
+                    >
+                      {product.title}
+                    </a>
+                  </h3>
+                  <p className="ml-4">£{product.price}</p>
+                </div>
+              </div>
+              <div className="flex flex-1 items-end justify-between text-sm">
+                <div className="flex gap-2 items-center">
+                  <button
+                    type="button"
+                    aria-label="Reduce quantity"
+                    className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
+                    onClick={() => {
+                      UpdateProduct(_id, CheckQuantity(qty)).then((res) =>
+                        setQty(res.quantity)
+                      );
+                    }}
                   >
-                    {product.title}
-                  </a>
-                </h3>
-                <p className="ml-4">£{product.price}</p>
+                    -
+                  </button>
+
+                  <p className="text-secondary">{qty}</p>
+                  <button
+                    type="button"
+                    aria-label="Add more"
+                    className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
+                    onClick={() => {
+                      UpdateProduct(_id, qty + 1).then((res) =>
+                        setQty(res.quantity)
+                      );
+                    }}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <div className="flex">
+                  <button
+                    type="button"
+                    className="font-medium text-highlight hover:text-tertiary"
+                    aria-label="Remove Item"
+                    onClick={() => {
+                      RemoveFromCart(_id).then(() => {
+                        GetCart().then((res) => setProducts(res));
+                      });
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="flex flex-1 items-end justify-between text-sm">
-              <div className="flex gap-2 items-center">
-                <button
-                  type="button"
-                  aria-label="Reduce quantity"
-                  className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
-                  onClick={() => {
-                    UpdateProduct(_id, CheckQuantity(qty)).then((res) =>
-                      setQty(res.quantity)
-                    );
-                  }}
-                >
-                  -
-                </button>
-
-                <p className="text-secondary">{qty}</p>
-                <button
-                  type="button"
-                  aria-label="Add more"
-                  className="font-medium text-white hover:bg-tertiary w-[20px] h-[20px] rounded bg-highlight"
-                  onClick={() => {
-                    UpdateProduct(_id, qty + 1).then((res) =>
-                      setQty(res.quantity)
-                    );
-                  }}
-                >
-                  +
-                </button>
-              </div>
-
-              <div className="flex">
-                <button
-                  type="button"
-                  className="font-medium text-highlight hover:text-tertiary"
-                  aria-label="Remove Item"
-                  onClick={() => {
-                    RemoveFromCart(_id).then(() => {
-                      GetCart().then((res) => setProducts(res));
-                    });
-                  }}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          </div>
-        </li>
-      )}
+          </>
+        )}
+      </li>
     </article>
   );
 };
@@ -139,6 +149,7 @@ const Cart = (props) => {
   const [shipping, setShipping] = useState(0.0);
   const [taxes, setTaxes] = useState(0.0);
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   function CalculatePrices() {
     let productTotal = 0.0;
     let totalPrice = 0.0;
@@ -159,11 +170,16 @@ const Cart = (props) => {
     setTotal(totalPrice);
   }
   useEffect(() => {
-    GetCart()
-      .then((res) => setProducts(res))
-      .then(() => {
-        CalculatePrices();
-      });
+    setLoading(true);
+    try {
+      GetCart()
+        .then((res) => setProducts(res))
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -176,16 +192,19 @@ const Cart = (props) => {
         {/* products */}
         <div className="mt-8 w-full max-w-[500px] ">
           <div className="flow-root border-b border-secondary pb-5">
-            <ul role="list" className="-my-6 divide-y divide-tertiary">
-              {products.map((product, index) => (
-                <CartProduct
-                  index={index}
-                  key={product._id}
-                  {...product}
-                  setProducts={setProducts}
-                />
-              ))}
-            </ul>
+            {loading && <Loader />}
+            {!loading && products.length > 0 && (
+              <ul role="list" className="-my-6 divide-y divide-tertiary">
+                {products.map((product, index) => (
+                  <CartProduct
+                    index={index}
+                    key={product._id}
+                    {...product}
+                    setProducts={setProducts}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 

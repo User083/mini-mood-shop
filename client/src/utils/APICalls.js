@@ -1,6 +1,16 @@
 import Axios from "axios";
 const BASE_URL = "http://localhost:8000";
 
+function convertImage(imageData) {
+  let binary = "";
+  let bytes = new Uint8Array(imageData);
+  let len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
 //PRODUCT CALLS
 
 export async function GetAllProducts() {
@@ -17,7 +27,16 @@ export async function GetAllProducts() {
 export async function GetProduct(id) {
   function getProduct() {
     return Axios.get(`${BASE_URL}/products/product/${id}`).then((res) => {
-      return res.data;
+      let response = {
+        image: res.data.image.data.data,
+        title: res.data.title,
+        price: res.data.price,
+        category: res.data.category,
+        collections: res.data.collections,
+        quantity: res.data.quantity,
+      };
+
+      return response;
     });
   }
   return await getProduct();
