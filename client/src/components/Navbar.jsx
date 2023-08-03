@@ -8,6 +8,7 @@ import {
 import { navigation } from "../constants";
 import { logo } from "../assets";
 import { Link } from "react-router-dom";
+import { useCartCount } from "../utils/CartCount";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +17,7 @@ function classNames(...classes) {
 const Navbar = (props) => {
   const [open, setOpen] = useState(false);
   const [openNav, setOpenNav] = useState(false);
+  const counter = useCartCount();
 
   return (
     <div className="bg-white">
@@ -289,7 +291,7 @@ const Navbar = (props) => {
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      {props.counter}
+                      {counter}
                     </span>
                     <span className="sr-only">items in cart, view cart</span>
                   </Link>

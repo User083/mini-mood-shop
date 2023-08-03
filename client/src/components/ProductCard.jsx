@@ -1,5 +1,6 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { AddToCart } from "../utils/APICalls";
+import { useCartCountUpdate } from "../utils/CartCount";
 
 function convertImage(data) {
   let binary = "";
@@ -12,7 +13,7 @@ function convertImage(data) {
 }
 const ProductCard = (props) => {
   const convertedImage = convertImage(props.product.image.data.data);
-
+  const UpdateCartCount = useCartCountUpdate();
   return (
     <article
       id={props.product._id}
@@ -41,7 +42,7 @@ const ProductCard = (props) => {
             type="button"
             onClick={() => {
               AddToCart(props.product);
-              // props.setCounter(props.cart.length);
+              UpdateCartCount(true);
             }}
           >
             <ShoppingBagIcon className="h-6 w-6 flex-shrink-0 text-tertiary hover:text-highlight active:animate-bounce" />

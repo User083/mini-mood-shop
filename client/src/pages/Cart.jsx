@@ -7,6 +7,7 @@ import {
   GetProduct,
 } from "../utils/APICalls";
 import { Loader } from "../components";
+import { useCartCountUpdate } from "../utils/CartCount";
 
 function CalcTotal(subtotal, tax, shipping) {
   let x = subtotal + tax + shipping;
@@ -30,6 +31,7 @@ function convertImage(imageData) {
 }
 
 const CartProduct = ({ index, quantity, item, _id, setProducts }) => {
+  const UpdateCartCount = useCartCountUpdate();
   //Add a 'get by id' for each item
   const [product, setProduct] = useState({});
   const [convertedImage, setConvertedImage] = useState("");
@@ -128,6 +130,7 @@ const CartProduct = ({ index, quantity, item, _id, setProducts }) => {
                     onClick={() => {
                       RemoveFromCart(_id).then(() => {
                         GetCart().then((res) => setProducts(res));
+                        UpdateCartCount(false);
                       });
                     }}
                   >
@@ -143,7 +146,7 @@ const CartProduct = ({ index, quantity, item, _id, setProducts }) => {
   );
 };
 
-const Cart = (props) => {
+const Cart = () => {
   const [subtotal, setSubtotal] = useState(0.0);
   const [total, setTotal] = useState(0.0);
   const [shipping, setShipping] = useState(0.0);

@@ -56,7 +56,6 @@ const ProductDisplay = (props) => {
 
       case "accessories":
         GetProductsByCategory(category).then((res) => {
-          console.log(res);
           setCurrentItems(res);
           setLoading(false);
         });
@@ -479,13 +478,7 @@ const ProductDisplay = (props) => {
                   {!loading && (
                     <div className="grid lg:grid-cols-3 md:grid-cols-2 md:gap-4 sm:grid-cols-1 gap-1">
                       {currentItems.map((product) => (
-                        <ProductCard
-                          key={product._id}
-                          product={product}
-                          setCart={props.setCart}
-                          cart={props.cart}
-                          setCounter={props.setCounter}
-                        />
+                        <ProductCard key={product._id} product={product} />
                       ))}
                     </div>
                   )}

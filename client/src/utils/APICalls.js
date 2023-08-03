@@ -1,16 +1,6 @@
 import Axios from "axios";
 const BASE_URL = "http://localhost:8000";
 
-function convertImage(imageData) {
-  let binary = "";
-  let bytes = new Uint8Array(imageData);
-  let len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return btoa(binary);
-}
-
 //PRODUCT CALLS
 
 export async function GetAllProducts() {

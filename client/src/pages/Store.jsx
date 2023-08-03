@@ -1,7 +1,7 @@
 import { useParams, useSearchParams } from "react-router-dom";
 import { ProductDisplay } from "../components";
 
-const Store = (props) => {
+const Store = () => {
   let params = useParams();
 
   return (
@@ -9,7 +9,6 @@ const Store = (props) => {
       <ProductDisplay
         query={params.collection.split("--")[0]}
         filter={params.collection.split("--").pop()}
-        setCounter={props.setCounter}
       />
     </div>
   );
