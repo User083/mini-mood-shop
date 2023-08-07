@@ -506,7 +506,7 @@ const ProductDisplay = (props) => {
                           ))}
                         </div>
                       )}
-                      {currentItems.length < 1 && <p>No results</p>}
+                      {currentItems.length < 1 && <Loader />}
                     </>
                   )}
                 </div>
