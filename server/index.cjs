@@ -1,17 +1,17 @@
-import express from "express";
-import "dotenv/config";
-import cors from "cors";
-import mongoose from "mongoose";
-// const express = require("express");
+// import express from "express";
+// import "dotenv/config";
+// import cors from "cors";
+// import mongoose from "mongoose";
+const express = require("express");
 const app = express();
-// const mongoose = require("mongoose");
-// require("dotenv").config();
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-const productsRouter = require("./routes/products");
-const cartRouter = require("./routes/cart");
+const productsRouter = require("./routes/products.cjs");
+const cartRouter = require("./routes/cart.cjs");
 const PORT = process.env.PORT || 3000;
 
-// const cors = require("cors");
+const cors = require("cors");
 
 async function connect() {
   try {
