@@ -1,5 +1,5 @@
 import Axios from "axios";
-const BASE_URL = "https://mini-mood-api.onrender.com/";
+const BASE_URL = "https://mini-mood-api.onrender.com";
 
 //PRODUCT CALLS
 
