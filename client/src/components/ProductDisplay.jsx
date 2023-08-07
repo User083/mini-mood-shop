@@ -361,7 +361,7 @@ const ProductDisplay = (props) => {
                   ))}
                 </section>
 
-                <section>
+                {/* <section>
                   <h3 className="sr-only">Filters</h3>
                   {filters.map((section) => (
                     <Disclosure
@@ -424,7 +424,7 @@ const ProductDisplay = (props) => {
                       )}
                     </Disclosure>
                   ))}
-                </section>
+                </section> */}
 
                 <h3 className="sr-only">Sort</h3>
                 {sortOptions.map((section) => (
