@@ -2,11 +2,11 @@
   "name": "mini-mood-api",
   "version": "1.0.0",
   "description": "Mini mood backend api",
-  "main": "index.cjs",
-  "type": "commonjs",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon -r dotenv/config index.js",
-    "start": "node index.cjs"
+    "start": "node index.js"
   },
   "keywords": [
     "e-commerce",

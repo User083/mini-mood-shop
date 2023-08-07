@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Products = require("../model/products");
-const upload = require("../middleware/multer");
+const Products = require("../model/products.cjs");
+const upload = require("../middleware/multer.cjs");
 const fs = require("fs");
+// import express from "express";
+// import Products from "../model/products";
+// import upload from "../middleware/multer";
+// import * as fs from "node:fs";
+// const router = express.Router();
 
 //GET all
 router.get("/", async (req, res) => {

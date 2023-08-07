@@ -1,8 +1,11 @@
 const express = require("express");
-const router = express.Router();
-const Cart = require("../model/cart");
-const upload = require("../middleware/multer");
+// import express from "express";
+// import upload from "../middleware/multer.js";
+// import Cart from "../model/cart.js";
+const Cart = require("../model/cart.cjs");
+const upload = require("../middleware/multer.cjs");
 
+const router = express.Router();
 //GET all
 router.get("/", async (req, res) => {
   try {
