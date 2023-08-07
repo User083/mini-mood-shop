@@ -1,10 +1,10 @@
-require("dotenv").config();
+// require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const productsRouter = require("./routes/products");
 const cartRouter = require("./routes/cart");
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const cors = require("cors");
 
